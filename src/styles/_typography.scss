@@ -1,0 +1,52 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: var(--heading-margin-bottom);
+    font-weight: var(--font-weight-bold); // Bolder headings
+    line-height: 1.2;
+    color: var(
+        --primary-color
+    ); // Use primary color for headings, or specific heading color
+}
+
+h1 {
+    font-size: calc(var(--font-size-base) * 2.5);
+} // ~40px
+h2 {
+    font-size: calc(var(--font-size-base) * 2);
+} // ~32px
+h3 {
+    font-size: calc(var(--font-size-base) * 1.75);
+} // ~28px
+h4 {
+    font-size: calc(var(--font-size-base) * 1.5);
+} // ~24px
+h5 {
+    font-size: calc(var(--font-size-base) * 1.25);
+} // ~20px
+h6 {
+    font-size: var(--font-size-base);
+} // ~16px
+
+p {
+    margin-bottom: var(
+        --spacer-md
+    ); // Use spacing variable for paragraph margin
+}
+
+// Use muted text color for less emphasis
+.text-muted {
+    color: var(--text-color-muted);
+}
+
+// Basic blockquote style
+blockquote {
+    margin: 0 0 var(--spacer-md);
+    padding: var(--spacer-sm) var(--spacer-md);
+    border-left: 4px solid var(--border-color);
+    font-style: italic;
+    color: var(--text-color-muted);
+}

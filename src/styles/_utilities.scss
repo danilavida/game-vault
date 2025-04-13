@@ -1,0 +1,74 @@
+// Display utilities
+.d-block {
+    display: block !important;
+}
+.d-flex {
+    display: flex !important;
+}
+.d-inline-block {
+    display: inline-block !important;
+}
+.d-none {
+    display: none !important;
+}
+
+// Text alignment
+.text-center {
+    text-align: center !important;
+}
+.text-start {
+    text-align: left !important;
+} // Use start/end for LTR/RTL compatibility
+.text-end {
+    text-align: right !important;
+}
+
+// Margin utilities (example for margin-bottom)
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+.mb-xs {
+    margin-bottom: var(--spacer-xs) !important;
+}
+.mb-sm {
+    margin-bottom: var(--spacer-sm) !important;
+}
+.mb-md {
+    margin-bottom: var(--spacer-md) !important;
+}
+.mb-lg {
+    margin-bottom: var(--spacer-lg) !important;
+}
+.mb-xl {
+    margin-bottom: var(--spacer-xl) !important;
+}
+// Add other margins (mt, ms, me, mx, my) and paddings (p*, pt, pb, etc.) as needed
+
+// Flexbox utilities
+.flex-column {
+    flex-direction: column !important;
+}
+.justify-content-center {
+    justify-content: center !important;
+}
+.align-items-center {
+    align-items: center !important;
+}
+// Add more as needed (e.g., justify-content-between, align-items-start, etc.)
+
+// Rounded corners
+.rounded {
+    @include border-radius(var(--border-radius));
+}
+.rounded-sm {
+    @include border-radius(var(--border-radius-sm));
+}
+.rounded-lg {
+    @include border-radius(var(--border-radius-lg));
+}
+.rounded-pill {
+    @include border-radius(50rem);
+} // For pill shapes
+.rounded-circle {
+    border-radius: 50% !important;
+}

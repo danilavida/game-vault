@@ -1,0 +1,43 @@
+// Example: Center content using Flexbox
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+// Example: Media Query Breakpoints
+// Usage: @include breakpoint(md) { ...styles... }
+@mixin breakpoint($point) {
+    @if $point == lg {
+        // Large devices (desktops, 1200px and up)
+        @media (min-width: 1200px) {
+            @content;
+        }
+    } @else if $point == md {
+        // Medium devices (tablets, 992px and up)
+        @media (min-width: 992px) {
+            @content;
+        }
+    } @else if $point == sm {
+        // Small devices (landscape phones, 768px and up)
+        @media (min-width: 768px) {
+            @content;
+        }
+    } @else if $point == xs {
+        // Extra small devices (portrait phones, less than 768px)
+        @media (max-width: 767.98px) {
+            @content;
+        }
+    }
+}
+
+// Example: Apply transition
+@mixin transition($property: var(--transition-base)) {
+    transition: $property;
+}
+
+// Example: Apply border radius
+@mixin border-radius($radius: var(--border-radius)) {
+    border-radius: $radius;
+}

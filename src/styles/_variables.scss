@@ -1,0 +1,69 @@
+:root {
+    // --- Color Palette ---
+
+    // Option 1: Carbón Profundo / Verde Azulado / Magenta (Commented Out)
+    // --primary-color: #212529;     // Carbón Profundo
+    // --secondary-color: #20c997;    // Verde Azulado
+    // --accent-color: #e83e8c;       // Magenta
+    // --background-color: #1a1a1d;  // Dark background example
+    // --card-background-color: #2c2f33; // Slightly lighter card background
+    // --text-color: #f8f9fa;        // Light text for dark backgrounds
+    // --text-color-muted: #adb5bd;   // Muted text
+    // --border-color: #495057;      // Border color for dark theme
+
+    // Option 2: Azul Marino / Cian / Dorado (Active Example)
+    --primary-color: #001f3f; // Azul Marino
+    --secondary-color: #17a2b8; // Cian
+    --accent-color: #ffc107; // Dorado
+    --background-color: #f4f7f6; // Light background example (adjust if you prefer dark)
+    --card-background-color: #ffffff; // White card background
+    --text-color: #212529; // Dark text for light backgrounds
+    --text-color-muted: #6c757d; // Muted text
+    --border-color: #dee2e6; // Border color for light theme
+
+    // Status Colors
+    --success-color: #28a745;
+    --warning-color: #ffc107; // Can be the same as accent or different
+    --danger-color: #dc3545;
+    --info-color: #17a2b8; // Can be the same as secondary or different
+
+    // --- Typography ---
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+        'Liberation Mono', 'Courier New', monospace;
+    --font-family-base: var(--font-family-sans-serif); // Default font
+    --font-size-base: 1rem; // Corresponds to 16px by default
+    --font-size-lg: calc(var(--font-size-base) * 1.25);
+    --font-size-sm: calc(var(--font-size-base) * 0.875);
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    --line-height-base: 1.5;
+    --heading-margin-bottom: calc(var(--spacer) * 0.5);
+
+    // --- Spacing ---
+    // Base spacer unit (e.g., 8px if font-size-base is 16px)
+    --spacer: 1rem;
+    --spacer-xs: calc(var(--spacer) * 0.25); // ~4px
+    --spacer-sm: calc(var(--spacer) * 0.5); // ~8px
+    --spacer-md: var(--spacer); // ~16px
+    --spacer-lg: calc(var(--spacer) * 1.5); // ~24px
+    --spacer-xl: calc(var(--spacer) * 3); // ~48px
+
+    // --- Borders ---
+    --border-width: 1px;
+    --border-radius: 0.375rem; // ~6px
+    --border-radius-sm: 0.25rem; // ~4px
+    --border-radius-lg: 0.5rem; // ~8px
+
+    // --- Transitions ---
+    --transition-base: all 0.2s ease-in-out;
+
+    // --- Box Shadow ---
+    --box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    --box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}

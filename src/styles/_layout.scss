@@ -1,0 +1,32 @@
+// Basic container class
+.container {
+    width: 100%;
+    padding-right: var(--spacer-md); // Use spacing variables
+    padding-left: var(--spacer-md);
+    margin-right: auto;
+    margin-left: auto;
+
+    // Define max-widths for different breakpoints if needed
+    @include breakpoint(sm) {
+        max-width: 540px;
+    }
+    @include breakpoint(md) {
+        max-width: 720px;
+    }
+    @include breakpoint(lg) {
+        max-width: 960px; // Adjust as needed
+    }
+    // Add xl breakpoint if necessary
+    // @include breakpoint(xl) {
+    //   max-width: 1140px;
+    // }
+}
+
+// Example fluid container
+.container-fluid {
+    width: 100%;
+    padding-right: var(--spacer-md);
+    padding-left: var(--spacer-md);
+    margin-right: auto;
+    margin-left: auto;
+}
