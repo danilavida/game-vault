@@ -1,1 +1,75 @@
-<p>login works!</p>
+<div class="login-container d-flex align-items-center justify-content-center">
+    <div class="login-card card p-xl">
+        <h3 class="text-center mb-lg">Iniciar Sesión</h3>
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <div class="form-group mb-md">
+                <label for="email" class="form-label d-block mb-sm">Correo Electrónico</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="tu@correo.com"
+                    required
+                    email
+                    ngModel
+                    #emailInput="ngModel"
+                    [class.is-invalid]="
+                        emailInput.invalid && (emailInput.dirty || emailInput.touched)
+                    "
+                />
+                <div
+                    *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)"
+                    class="invalid-feedback mt-xs"
+                >
+                    <div *ngIf="emailInput.errors?.['required']">El correo es requerido.</div>
+                    <div *ngIf="emailInput.errors?.['email']">Ingresa un correo válido.</div>
+                </div>
+            </div>
+
+            <div class="form-group mb-lg">
+                <label for="password" class="form-label d-block mb-sm">Contraseña</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Tu contraseña"
+                    required
+                    minlength="6"
+                    ngModel
+                    #passwordInput="ngModel"
+                    [class.is-invalid]="
+                        passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)
+                    "
+                />
+                <div
+                    *ngIf="
+                        passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)
+                    "
+                    class="invalid-feedback mt-xs"
+                >
+                    <div *ngIf="passwordInput.errors?.['required']">
+                        La contraseña es requerida.
+                    </div>
+                    <div *ngIf="passwordInput.errors?.['minlength']">
+                        La contraseña debe tener al menos 6 caracteres.
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">
+                Entrar
+            </button>
+
+            <div class="text-center mt-lg">
+                <small class="text-muted"
+                    >¿No tienes cuenta? <a routerLink="../register">Regístrate aquí</a></small
+                >
+            </div>
+            <div class="text-center mt-sm">
+                <small><a href="#">¿Olvidaste tu contraseña?</a></small>
+            </div>
+        </form>
+    </div>
+</div>

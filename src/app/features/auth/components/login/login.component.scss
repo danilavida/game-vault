@@ -1,0 +1,209 @@
+// src/app/features/auth/components/login/login.component.scss
+// Estilos autocontenidos para el componente Login, sin dependencias globales.
+
+// --- Definiciones locales (simulando la paleta Azul Marino / Cian / Dorado) ---
+$primary-color: #001f3f; // Azul Marino
+$secondary-color: #17a2b8; // Cian
+$accent-color: #ffc107; // Dorado
+$danger-color: #dc3545; // Rojo para errores
+$background-color: #f4f7f6; // Fondo claro
+$card-background-color: #ffffff; // Fondo de tarjeta blanco
+$text-color: #212529; // Texto oscuro
+$text-color-muted: #6c757d; // Texto atenuado
+$border-color: #dee2e6; // Color de borde claro
+
+$border-width: 1px;
+$border-radius: 0.375rem; // ~6px
+$border-radius-sm: 0.25rem; // ~4px
+
+$spacer-xs: 0.25rem; // ~4px
+$spacer-sm: 0.5rem; // ~8px
+$spacer-md: 1rem; // ~16px
+$spacer-lg: 1.5rem; // ~24px
+$spacer-xl: 3rem; // ~48px
+
+$font-size-base: 1rem;
+$font-size-sm: 0.875rem;
+$font-weight-bold: 700;
+$font-weight-normal: 400;
+$line-height-base: 1.5;
+
+$transition-duration: 0.2s;
+// --- Fin Definiciones locales ---
+
+// Container principal para centrar la tarjeta de login
+.login-container {
+    min-height: calc(100vh - 60px); // Ajusta 60px si tienes una barra de navegación
+    padding: $spacer-md;
+    display: flex; // Usando flexbox directamente para centrar
+    align-items: center;
+    justify-content: center;
+    background-color: $background-color; // Fondo general
+}
+
+// Estilos para la tarjeta de login
+.login-card {
+    width: 100%;
+    max-width: 450px;
+    background-color: $card-background-color;
+    border: $border-width solid $border-color;
+    border-radius: $border-radius;
+    padding: $spacer-xl; // Padding generoso dentro de la tarjeta
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); // Sombra
+    margin-bottom: $spacer-md; // Margen inferior si hay más elementos
+}
+
+// Título centrado
+.text-center {
+    text-align: center !important;
+}
+
+// Márgenes (ejemplos usados en el HTML)
+.mb-lg {
+    margin-bottom: $spacer-lg !important;
+}
+.mb-md {
+    margin-bottom: $spacer-md !important;
+}
+.mb-sm {
+    margin-bottom: $spacer-sm !important;
+}
+.mt-lg {
+    margin-top: $spacer-lg !important;
+}
+.mt-sm {
+    margin-top: $spacer-sm !important;
+}
+.mt-xs {
+    margin-top: $spacer-xs !important;
+}
+
+// Estilos específicos para los elementos del formulario
+.form-group {
+    // El espaciado se aplica con clases de utilidad mb-*
+}
+
+.form-label {
+    display: block; // Asegura que ocupe su línea
+    font-weight: $font-weight-bold;
+    color: $text-color;
+    font-size: $font-size-sm;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: $font-size-base;
+    font-weight: $font-weight-normal;
+    line-height: $line-height-base;
+    color: $text-color;
+    background-color: lighten($background-color, 2%); // Fondo ligeramente diferente
+    background-clip: padding-box;
+    border: $border-width solid $border-color;
+    appearance: none;
+    border-radius: $border-radius-sm;
+    transition: border-color $transition-duration ease-in-out,
+        box-shadow $transition-duration ease-in-out;
+
+    &:focus {
+        color: $text-color;
+        background-color: lighten($background-color, 4%);
+        border-color: $primary-color;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
+    }
+
+    &::placeholder {
+        color: $text-color-muted;
+        opacity: 1;
+    }
+
+    // Estilos para inputs inválidos
+    &.is-invalid {
+        border-color: $danger-color;
+
+        &:focus {
+            box-shadow: 0 0 0 0.2rem rgba($danger-color, 0.25);
+        }
+    }
+}
+
+// Estilo para mensajes de error
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    font-size: $font-size-sm;
+    color: $danger-color;
+}
+
+// Muestra el mensaje de error cuando el input es inválido
+.form-control.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+// Estilo para el botón de submit
+.btn {
+    display: inline-block;
+    font-weight: $font-weight-normal;
+    color: $text-color; // Color base, se sobreescribe en btn-primary
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    border: $border-width solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    border-radius: $border-radius;
+    transition: color $transition-duration ease-in-out,
+        background-color $transition-duration ease-in-out,
+        border-color $transition-duration ease-in-out,
+        box-shadow $transition-duration ease-in-out;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    // Estilo específico para botón primario
+    &.btn-primary {
+        color: #fff; // Texto blanco
+        background-color: $primary-color;
+        border-color: $primary-color;
+
+        &:hover {
+            background-color: darken($primary-color, 10%);
+            border-color: darken($primary-color, 12%);
+        }
+
+        &:disabled {
+            background-color: $text-color-muted;
+            border-color: $text-color-muted;
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+    }
+}
+
+// Ancho completo para el botón
+.w-100 {
+    width: 100% !important;
+}
+
+// Texto atenuado
+.text-muted {
+    color: $text-color-muted !important;
+}
+
+// Ajustes para enlaces dentro de la tarjeta
+.login-card a {
+    color: $secondary-color;
+    font-weight: $font-weight-bold;
+    text-decoration: none; // Quitar subrayado por defecto
+
+    &:hover {
+        color: darken($secondary-color, 10%);
+        text-decoration: underline; // Subrayar en hover
+    }
+}
