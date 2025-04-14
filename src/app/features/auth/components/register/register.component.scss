@@ -1,0 +1,258 @@
+// src/app/features/auth/components/register/register.component.scss
+// Estilos para el componente Register, adaptados desde login.component.scss para consistencia.
+
+// --- Definiciones locales (Iguales a Login) ---
+$primary-color: #001f3f; // Azul Marino
+$secondary-color: #17a2b8; // Cian
+$accent-color: #ffc107; // Dorado
+$danger-color: #dc3545; // Rojo para errores
+
+$card-bg-color: rgba(255, 255, 255, 0.819); // Fondo de tarjeta blanco semi-transparente
+$card-border-color: rgba(0, 0, 0, 0.1); // Borde sutil
+$input-bg-color: #f8f9fa;
+$input-focus-bg-color: #ffffff;
+$text-color: #212529;
+$text-color-muted: #6c757d;
+$input-border-color: #ced4da;
+// Variables para el avatar (copiadas de login.scss)
+$avatar-placeholder-bg: #e9ecef;
+$avatar-icon-color: $primary-color;
+
+$border-width: 1px;
+$border-radius: 0.375rem;
+$border-radius-sm: 0.25rem;
+
+$spacer-xs: 0.25rem;
+$spacer-sm: 0.5rem;
+$spacer-md: 1rem;
+$spacer-lg: 1.5rem;
+$spacer-xl: 3rem;
+
+$font-size-base: 1rem;
+$font-size-sm: 0.875rem;
+$font-weight-bold: 700;
+$font-weight-normal: 400;
+$line-height-base: 1.5;
+
+$transition-duration: 0.2s;
+// --- Fin Definiciones locales ---
+
+// Container principal
+.register-container {
+    min-height: 100vh;
+    padding: $spacer-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $primary-color; // Fallback
+    background-image: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+// Estilos para la tarjeta
+.register-card {
+    width: 100%;
+    max-width: 480px; // Puede ser un poco más ancha que la de login
+    background-color: $card-bg-color;
+    border: $border-width solid $card-border-color;
+    border-radius: $border-radius;
+    padding: $spacer-xl;
+    box-shadow: 0 0.8rem 10.5rem rgba(0, 0, 0, 0.25); // Sombra consistente
+    margin-bottom: $spacer-md;
+    backdrop-filter: blur(10px); // Efecto blur consistente
+    // -webkit-backdrop-filter: blur(10px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+// Estilos para el placeholder del avatar (adaptado de login.scss)
+.register-avatar-placeholder {
+    // Nombre de clase específico para registro
+    width: 150px; // Tamaño consistente con login
+    height: 150px;
+    background-color: $avatar-placeholder-bg;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid $card-bg-color; // Borde consistente
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Sombra consistente
+    cursor: pointer;
+    overflow: hidden;
+
+    .avatar-icon {
+        width: 140px; // Tamaño consistente
+        height: 140px;
+        color: $avatar-icon-color; // Color consistente
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+// --- Estilos de Formulario (Consistentes con Login) ---
+
+.text-center {
+    text-align: center !important;
+}
+.mb-lg {
+    margin-bottom: $spacer-lg !important;
+}
+.mb-md {
+    margin-bottom: $spacer-md !important;
+}
+.mb-sm {
+    margin-bottom: $spacer-sm !important;
+}
+.mt-lg {
+    margin-top: $spacer-lg !important;
+}
+.mt-sm {
+    margin-top: $spacer-sm !important;
+}
+.mt-xs {
+    margin-top: $spacer-xs !important;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.form-label {
+    display: block;
+    font-weight: $font-weight-bold;
+    color: $text-color;
+    font-size: $font-size-sm;
+    text-align: left;
+    width: 100%;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: $font-size-base;
+    font-weight: $font-weight-normal;
+    line-height: $line-height-base;
+    color: $text-color;
+    background-color: $input-bg-color;
+    background-clip: padding-box;
+    border: $border-width solid $input-border-color;
+    appearance: none;
+    border-radius: $border-radius-sm;
+    transition: border-color $transition-duration ease-in-out,
+        box-shadow $transition-duration ease-in-out,
+        background-color $transition-duration ease-in-out;
+
+    &:focus {
+        color: $text-color;
+        background-color: $input-focus-bg-color;
+        border-color: $primary-color;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
+    }
+
+    &::placeholder {
+        color: $text-color-muted;
+        opacity: 1;
+    }
+
+    &.is-invalid {
+        border-color: $danger-color;
+        &:focus {
+            box-shadow: 0 0 0 0.2rem rgba($danger-color, 0.25);
+        }
+    }
+}
+
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    font-size: $font-size-sm;
+    color: $danger-color;
+    text-align: left;
+
+    &.d-block {
+        display: block !important;
+    }
+}
+
+.form-control.is-invalid ~ .invalid-feedback:not(.d-block),
+.invalid-feedback.d-block {
+    display: block;
+}
+
+.btn {
+    display: inline-block;
+    font-weight: $font-weight-normal;
+    color: $text-color;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    border: $border-width solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    border-radius: $border-radius;
+    transition: color $transition-duration ease-in-out,
+        background-color $transition-duration ease-in-out,
+        border-color $transition-duration ease-in-out,
+        box-shadow $transition-duration ease-in-out;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &.btn-primary {
+        color: #fff;
+        background-color: $primary-color;
+        border-color: $primary-color;
+
+        &:hover {
+            background-color: darken($primary-color, 10%);
+            border-color: darken($primary-color, 12%);
+        }
+
+        &:disabled {
+            background-color: $text-color-muted;
+            border-color: $text-color-muted;
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.w-100 {
+    width: 100% !important;
+}
+.text-muted {
+    color: $text-color-muted !important;
+}
+
+// Ajustes para enlaces dentro de la tarjeta (adaptado)
+.register-card a {
+    // Selector adaptado a la tarjeta de registro
+    color: $secondary-color;
+    font-weight: $font-weight-bold;
+    text-decoration: none;
+
+    &:hover {
+        color: darken($secondary-color, 10%);
+        text-decoration: underline;
+    }
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

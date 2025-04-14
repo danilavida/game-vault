@@ -1,1 +1,177 @@
-<p>register works!</p>
+<div class="register-container d-flex align-items-center justify-content-center">
+    <div class="register-card card p-xl">
+        <h3 class="text-center mb-lg">Crear Cuenta</h3>
+        <div class="register-avatar-placeholder mb-lg">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="avatar-icon"
+            >
+                <path
+                    fill-rule="evenodd"
+                    d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+                    clip-rule="evenodd"
+                />
+            </svg>
+        </div>
+
+        <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm" novalidate>
+            <div class="form-group mb-md">
+                <label for="username" class="form-label d-block mb-sm"
+                    >Nombre de Usuario</label
+                >
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    class="form-control"
+                    placeholder="Elige un nombre de usuario"
+                    required
+                    minlength="3"
+                    [(ngModel)]="registerData.username"
+                    #usernameInput="ngModel"
+                    [class.is-invalid]="
+                        usernameInput.invalid &&
+                        (usernameInput.dirty || usernameInput.touched)
+                    "
+                />
+                <div
+                    *ngIf="
+                        usernameInput.invalid &&
+                        (usernameInput.dirty || usernameInput.touched)
+                    "
+                    class="invalid-feedback mt-xs"
+                >
+                    <div *ngIf="usernameInput.errors?.['required']">
+                        El nombre de usuario es requerido.
+                    </div>
+                    <div *ngIf="usernameInput.errors?.['minlength']">
+                        Debe tener al menos 3 caracteres.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-md">
+                <label for="email" class="form-label d-block mb-sm"
+                    >Correo Electrónico</label
+                >
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="tu@correo.com"
+                    required
+                    email
+                    [(ngModel)]="registerData.email"
+                    #emailInput="ngModel"
+                    [class.is-invalid]="
+                        emailInput.invalid && (emailInput.dirty || emailInput.touched)
+                    "
+                />
+                <div
+                    *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)"
+                    class="invalid-feedback mt-xs"
+                >
+                    <div *ngIf="emailInput.errors?.['required']">
+                        El correo es requerido.
+                    </div>
+                    <div *ngIf="emailInput.errors?.['email']">
+                        Ingresa un correo válido.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-md">
+                <label for="password" class="form-label d-block mb-sm">Contraseña</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Crea una contraseña segura"
+                    required
+                    minlength="6"
+                    [(ngModel)]="registerData.password"
+                    #passwordInput="ngModel"
+                    (input)="checkPasswords(registerForm)"
+                    [class.is-invalid]="
+                        passwordInput.invalid &&
+                        (passwordInput.dirty || passwordInput.touched)
+                    "
+                />
+                <div
+                    *ngIf="
+                        passwordInput.invalid &&
+                        (passwordInput.dirty || passwordInput.touched)
+                    "
+                    class="invalid-feedback mt-xs"
+                >
+                    <div *ngIf="passwordInput.errors?.['required']">
+                        La contraseña es requerida.
+                    </div>
+                    <div *ngIf="passwordInput.errors?.['minlength']">
+                        Debe tener al menos 6 caracteres.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-lg">
+                <label for="confirmPassword" class="form-label d-block mb-sm"
+                    >Confirmar Contraseña</label
+                >
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    class="form-control"
+                    placeholder="Vuelve a escribir la contraseña"
+                    required
+                    [(ngModel)]="registerData.confirmPassword"
+                    #confirmPasswordInput="ngModel"
+                    (input)="checkPasswords(registerForm)"
+                    [class.is-invalid]="
+                        (confirmPasswordInput.invalid &&
+                            (confirmPasswordInput.dirty ||
+                                confirmPasswordInput.touched)) ||
+                        (passwordMismatch && confirmPasswordInput.touched)
+                    "
+                />
+                <div
+                    *ngIf="passwordMismatch && confirmPasswordInput.touched"
+                    class="invalid-feedback mt-xs d-block"
+                >
+                    Las contraseñas no coinciden.
+                </div>
+                <div
+                    *ngIf="
+                        confirmPasswordInput.invalid &&
+                        (confirmPasswordInput.dirty || confirmPasswordInput.touched) &&
+                        !passwordMismatch
+                    "
+                    class="invalid-feedback mt-xs"
+                >
+                    <div *ngIf="confirmPasswordInput.errors?.['required']">
+                        Confirma tu contraseña.
+                    </div>
+                </div>
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-primary w-100"
+                [disabled]="registerForm.invalid || passwordMismatch"
+            >
+                Registrarse
+            </button>
+
+            <div class="text-center mt-lg">
+                <small class="text-muted"
+                    >¿Ya tienes cuenta?
+                    <a routerLink="/login">Inicia sesión aquí</a></small
+                >
+            </div>
+        </form>
+    </div>
+</div>

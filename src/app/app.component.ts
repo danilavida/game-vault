@@ -5,7 +5,7 @@ import { RegisterComponent } from './features/auth/components/register/register.
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, LoginComponent, RegisterComponent],
+    imports: [RouterOutlet],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })
