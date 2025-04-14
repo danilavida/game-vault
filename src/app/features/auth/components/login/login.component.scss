@@ -1,16 +1,24 @@
 // src/app/features/auth/components/login/login.component.scss
-// Estilos autocontenidos para el componente Login, sin dependencias globales.
+// Estilos autocontenidos para el componente Login, con fondo gradiente oscuro, tarjeta transparente y placeholder de avatar.
 
-// --- Definiciones locales (simulando la paleta Azul Marino / Cian / Dorado) ---
+// --- Definiciones locales (Paleta Azul Marino / Cian / Dorado) ---
 $primary-color: #001f3f; // Azul Marino
 $secondary-color: #17a2b8; // Cian
 $accent-color: #ffc107; // Dorado
 $danger-color: #dc3545; // Rojo para errores
-$background-color: #f4f7f6; // Fondo claro
-$card-background-color: #ffffff; // Fondo de tarjeta blanco
-$text-color: #212529; // Texto oscuro
-$text-color-muted: #6c757d; // Texto atenuado
-$border-color: #dee2e6; // Color de borde claro
+
+// --- Colores para la tarjeta y su contenido (Tema claro dentro de la tarjeta) ---
+// MODIFICADO: Ajusta la opacidad (el último valor, 0.85 = 85% opaco)
+$card-bg-color: rgba(255, 255, 255, 0.819); // Fondo de tarjeta blanco semi-transparente
+$card-border-color: rgba(0, 0, 0, 0.1); // Borde sutil para la tarjeta sobre fondo oscuro
+$input-bg-color: #f8f9fa; // Fondo muy claro para inputs dentro de la tarjeta
+$input-focus-bg-color: #ffffff; // Fondo blanco al hacer focus en input
+$text-color: #212529; // Texto oscuro (para contenido dentro de la tarjeta)
+$text-color-muted: #6c757d; // Texto atenuado (para contenido dentro de la tarjeta)
+$input-border-color: #ced4da; // Borde para inputs
+// NUEVO: Color para el placeholder del avatar
+$avatar-placeholder-bg: #e9ecef;
+$avatar-icon-color: $primary-color;
 
 $border-width: 1px;
 $border-radius: 0.375rem; // ~6px
@@ -29,35 +37,67 @@ $font-weight-normal: 400;
 $line-height-base: 1.5;
 
 $transition-duration: 0.2s;
+// --- Fin Definiciones locales ---
 
 // Container principal para centrar la tarjeta de login
 .login-container {
-    min-height: calc(100vh - 60px); // Ajusta 60px si tienes una barra de navegación
+    min-height: 100vh;
     padding: $spacer-md;
-    display: flex; // Usando flexbox directamente para centrar
-    align-items: center;
-    justify-content: center;
-    background-color: $background-color; // Fondo general
+    display: flex;
+    align-items: center; // Centra la tarjeta verticalmente
+    justify-content: center; // Centra la tarjeta horizontalmente
+    background-color: $primary-color; // Fallback
+    background-image: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 // Estilos para la tarjeta de login
 .login-card {
     width: 100%;
     max-width: 450px;
-    background-color: $card-background-color;
-    border: $border-width solid $border-color;
+    background-color: $card-bg-color;
+    border: $border-width solid $card-border-color;
     border-radius: $border-radius;
-    padding: $spacer-xl; // Padding generoso dentro de la tarjeta
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); // Sombra
-    margin-bottom: $spacer-md; // Margen inferior si hay más elementos
+    padding: $spacer-xl;
+    box-shadow: 0 0.8rem 10.5rem rgba(0, 0, 0, 0.25);
+    margin-bottom: $spacer-md;
+    // MODIFICADO: Ajustar el valor de blur si se desea un efecto más o menos intenso
+    backdrop-filter: blur(10px);
+    // -webkit-backdrop-filter: blur(8px); // Para Safari
+
+    // Centrar el contenido de la tarjeta (incluyendo el nuevo avatar)
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-// Título centrado
+// NUEVO: Estilos para el placeholder del avatar
+.login-avatar-placeholder {
+    width: 150px; // Tamaño del círculo
+    height: 150px;
+    background-color: $avatar-placeholder-bg; // Color de fondo gris claro
+    border-radius: 50%; // Hacerlo circular
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid $card-bg-color; // Borde para separarlo visualmente
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Sombra sutil
+
+    // Estilos para el icono dentro del placeholder (opcional)
+    .avatar-icon {
+        width: 140px;
+        height: 140px;
+        color: $avatar-icon-color; // Color del icono
+    }
+}
+
+// Título centrado (ya definido por .text-center)
 .text-center {
     text-align: center !important;
 }
 
-// Márgenes (ejemplos usados en el HTML)
+// Márgenes (sin cambios)
 .mb-lg {
     margin-bottom: $spacer-lg !important;
 }
@@ -79,14 +119,16 @@ $transition-duration: 0.2s;
 
 // Estilos específicos para los elementos del formulario
 .form-group {
-    // El espaciado se aplica con clases de utilidad mb-*
+    width: 100%; // Asegurar que ocupe todo el ancho dentro de la tarjeta
 }
 
 .form-label {
-    display: block; // Asegura que ocupe su línea
+    display: block;
     font-weight: $font-weight-bold;
     color: $text-color;
     font-size: $font-size-sm;
+    text-align: left; // Alinear a la izquierda
+    width: 100%; // Ocupar ancho
 }
 
 .form-control {
@@ -97,17 +139,18 @@ $transition-duration: 0.2s;
     font-weight: $font-weight-normal;
     line-height: $line-height-base;
     color: $text-color;
-    background-color: lighten($background-color, 2%); // Fondo ligeramente diferente
+    background-color: $input-bg-color;
     background-clip: padding-box;
-    border: $border-width solid $border-color;
+    border: $border-width solid $input-border-color;
     appearance: none;
     border-radius: $border-radius-sm;
     transition: border-color $transition-duration ease-in-out,
-        box-shadow $transition-duration ease-in-out;
+        box-shadow $transition-duration ease-in-out,
+        background-color $transition-duration ease-in-out;
 
     &:focus {
         color: $text-color;
-        background-color: lighten($background-color, 4%);
+        background-color: $input-focus-bg-color;
         border-color: $primary-color;
         outline: 0;
         box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
@@ -118,25 +161,22 @@ $transition-duration: 0.2s;
         opacity: 1;
     }
 
-    // Estilos para inputs inválidos
     &.is-invalid {
         border-color: $danger-color;
-
         &:focus {
             box-shadow: 0 0 0 0.2rem rgba($danger-color, 0.25);
         }
     }
 }
 
-// Estilo para mensajes de error
 .invalid-feedback {
     display: none;
     width: 100%;
     font-size: $font-size-sm;
     color: $danger-color;
+    text-align: left; // Alinear a la izquierda
 }
 
-// Muestra el mensaje de error cuando el input es inválido
 .form-control.is-invalid ~ .invalid-feedback {
     display: block;
 }
@@ -145,7 +185,7 @@ $transition-duration: 0.2s;
 .btn {
     display: inline-block;
     font-weight: $font-weight-normal;
-    color: $text-color; // Color base, se sobreescribe en btn-primary
+    color: $text-color;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
@@ -165,9 +205,8 @@ $transition-duration: 0.2s;
         text-decoration: none;
     }
 
-    // Estilo específico para botón primario
     &.btn-primary {
-        color: #fff; // Texto blanco
+        color: #fff;
         background-color: $primary-color;
         border-color: $primary-color;
 
@@ -185,12 +224,10 @@ $transition-duration: 0.2s;
     }
 }
 
-// Ancho completo para el botón
 .w-100 {
     width: 100% !important;
 }
 
-// Texto atenuado
 .text-muted {
     color: $text-color-muted !important;
 }
@@ -199,10 +236,18 @@ $transition-duration: 0.2s;
 .login-card a {
     color: $secondary-color;
     font-weight: $font-weight-bold;
-    text-decoration: none; // Quitar subrayado por defecto
+    text-decoration: none;
 
     &:hover {
         color: darken($secondary-color, 10%);
-        text-decoration: underline; // Subrayar en hover
+        text-decoration: underline;
     }
+}
+
+// Asegurar que el formulario ocupe el ancho completo también
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
