@@ -1,1 +1,32 @@
-<p>home works!</p>
+<nav class="navbar">
+    <div class="navbar-container">
+        <a class="navbar-brand" href="#">Game Vault</a>
+
+        <div class="navbar-links">
+            <button (click)="goToPopular()" class="nav-link">Más populares</button>
+            <button (click)="goToDownloaded()" class="nav-link">Más descargados</button>
+            <button (click)="goToUpcoming()" class="nav-link">Próximamente</button>
+            <button (click)="goToAdd()" class="nav-link">Agregar</button>
+        </div>
+
+        <button (click)="logout()" class="btn btn-logout">Salir</button>
+    </div>
+</nav>
+
+<main class="home-content">
+    <div class="container">
+        <h2 class="section-title">Catálogo de Juegos</h2>
+        <div class="card-grid">
+            <div *ngFor="let card of gameCards" class="game-card-placeholder">
+                <div class="card-header-placeholder"></div>
+                <div class="card-image-placeholder"></div>
+                <div class="card-body-placeholder">
+                    <div class="line short"></div>
+                    <div class="line long"></div>
+                    <div class="line medium"></div>
+                </div>
+                <div class="card-footer-placeholder"></div>
+            </div>
+        </div>
+    </div>
+</main>
