@@ -1,0 +1,221 @@
+// src/app/shared/components/game-card/game-card.component.scss
+// Styles for the reusable GameCardComponent.
+
+$primary-color: #001f3f;
+$secondary-color: #17a2b8;
+$accent-color: #ffc107;
+$success-color: #28a745;
+$danger-color: #dc3545;
+
+$card-background-color: #ffffff;
+$text-color: #212529;
+$text-color-muted: #6c757d;
+$border-color: #dee2e6;
+$placeholder-bg: #e9ecef;
+
+$border-width: 1px;
+$border-radius: 1.375rem;
+$border-radius-sm: 0.25rem;
+
+$spacer-xs: 0.25rem;
+$spacer-sm: 0.5rem;
+$spacer-md: 1rem;
+$spacer-lg: 1.5rem;
+
+$font-size-base: 1rem;
+$font-size-sm: 0.875rem;
+$font-weight-bold: 700;
+
+$transition-duration: 0.2s;
+$transition-base: all $transition-duration ease-in-out;
+
+$box-shadow-sm: 0 0.125rem 0.55rem rgba(0, 0, 0, 0.575);
+$box-shadow-hover: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+
+.game-card {
+    background-color: $card-background-color;
+    border: $border-width solid $border-color;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-sm;
+    transition: $transition-base;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    cursor: pointer;
+
+    &:hover {
+        transform: translateY(-7px);
+        box-shadow: $box-shadow-hover;
+    }
+}
+
+.card-header {
+    padding: $spacer-sm $spacer-md;
+    background-color: darken($card-background-color, 3%);
+    border-bottom: $border-width solid $border-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 50px;
+}
+
+.card-title {
+    margin: 0;
+    font-size: $font-size-base * 1.1;
+    font-weight: $font-weight-bold;
+    color: $primary-color;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80%;
+}
+
+.card-icons {
+    display: flex;
+    align-items: center;
+    gap: $spacer-xs;
+
+    .badge {
+        font-size: $font-size-sm * 0.9;
+        padding: $spacer-xs * 0.5 $spacer-xs;
+        border-radius: $border-radius-sm;
+        font-weight: $font-weight-bold;
+    }
+
+    .coming-soon-badge {
+        background-color: $accent-color;
+        color: $primary-color;
+    }
+}
+
+.card-image-container {
+    width: 100%;
+    padding-top: 56.25%;
+    position: relative;
+    background-color: $placeholder-bg;
+
+    &.no-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 150px;
+        padding-top: 0;
+    }
+}
+
+.card-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: $text-color-muted;
+    background-color: $placeholder-bg;
+}
+
+.card-body {
+    padding: $spacer-md;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.release-date {
+    font-size: $font-size-sm;
+    color: $text-color-muted;
+    margin-bottom: $spacer-xs;
+}
+
+.rating {
+    margin-bottom: $spacer-sm;
+    color: $text-color-muted;
+
+    .star {
+        font-size: $font-size-base * 1.2;
+        margin-right: 2px;
+        transition: color 0.1s ease-in-out;
+
+        &.filled {
+            color: $accent-color;
+        }
+    }
+}
+
+.card-description {
+    font-size: $font-size-sm;
+    color: $text-color;
+    line-height: 1.4;
+    margin-bottom: $spacer-md;
+    // Limit description lines (optional)
+    display: -webkit-box;
+    -webkit-line-clamp: 4; // Show 3 lines max
+    line-clamp: 4; // Standard property for compatibility
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+}
+
+.card-footer {
+    padding: $spacer-sm $spacer-md;
+    border-top: $border-width solid $border-color;
+    text-align: center; // Align button to the right
+    background-color: darken($card-background-color, 1%);
+}
+
+// Reusing button styles (adjust as needed)
+.btn {
+    display: inline-block;
+    font-weight: $font-weight-bold;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    border: $border-width solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: $font-size-base;
+    line-height: 1.5;
+    border-radius: $border-radius;
+    transition: $transition-base;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.btn-add-cart {
+    color: #fff;
+    background-color: $success-color; // Green button
+    border-color: $success-color;
+    font-size: $font-size-sm; // Slightly smaller button text
+
+    &:hover {
+        background-color: darken($success-color, 10%);
+        border-color: darken($success-color, 12%);
+    }
+}
+
+.game-card-missing {
+    padding: $spacer-lg;
+    text-align: center;
+    color: $text-color-muted;
+    border: $border-width dashed $border-color;
+    border-radius: $border-radius;
+}
