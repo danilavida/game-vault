@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit {
             releaseDate: '01/junio/2024',
             image: 'https://placehold.co/600x400/001f3f/FFF?text=Game+Image+7',
             rating: 2, // > 4
-            downloads: 13000,
+            downloads: 13,
             comingSoon: false
         },
         {
@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit {
             releaseDate: '31/octubre/2024',
             image: 'https://placehold.co/600x400/343a40/FFF?text=Game+Image+8',
             rating: 1.5, // <= 4
-            downloads: 500,
+            downloads: 50,
             comingSoon: false
         }
     ]
