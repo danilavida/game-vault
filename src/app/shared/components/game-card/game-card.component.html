@@ -1,0 +1,46 @@
+<div class="game-card" *ngIf="game" (click)="viewGameDetails()">
+    <div class="card-header">
+        <h5 class="card-title">{{ game.title }}</h5>
+        <div class="card-icons">
+            <span *ngIf="game.comingSoon" class="badge coming-soon-badge"
+                >Próximamente</span
+            >
+        </div>
+    </div>
+
+    <div class="card-image-container">
+        <img
+            [src]="game.image"
+            [alt]="'Imagen de ' + game.title"
+            class="card-img"
+            onerror="this.style.display='none'; this.parentElement.classList.add('no-image')"
+        />
+        <div class="image-placeholder" *ngIf="!game.image">?</div>
+    </div>
+
+    <div class="card-body">
+        <div class="release-date">
+            <strong>Lanzamiento:</strong> {{ game.releaseDate }}
+        </div>
+        <div class="rating">
+            <span
+                *ngFor="let isFilled of ratingStars"
+                class="star"
+                [class.filled]="isFilled"
+            >
+                &#9733;
+            </span>
+        </div>
+        <p class="card-description">{{ game.description }}</p>
+    </div>
+
+    <div class="card-footer">
+        <button class="btn btn-add-cart" (click)="addToCart($event)">
+            Agregar al carrito
+        </button>
+    </div>
+</div>
+
+<div *ngIf="!game" class="game-card-missing">
+    <p>No hay información del juego disponible.</p>
+</div>

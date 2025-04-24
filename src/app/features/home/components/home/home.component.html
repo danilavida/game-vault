@@ -1,14 +1,39 @@
 <nav class="navbar">
     <div class="navbar-container">
-        <a class="navbar-brand" href="#">Game Vault</a>
+        <a class="navbar-brand" href="#" (click)="showAllGames(); $event.preventDefault()"
+            >Game Vault</a
+        >
 
         <div class="navbar-links">
-            <button (click)="goToPopular()" class="nav-link">Más populares</button>
-            <button (click)="goToDownloaded()" class="nav-link">Más descargados</button>
-            <button (click)="goToUpcoming()" class="nav-link">Próximamente</button>
-            <button (click)="goToAdd()" class="nav-link">Agregar</button>
+            <button
+                (click)="filterPopular()"
+                class="nav-link"
+                [class.active]="activeFilter === 'popular'"
+            >
+                Más populares
+            </button>
+            <button
+                (click)="filterDownloaded()"
+                class="nav-link"
+                [class.active]="activeFilter === 'downloaded'"
+            >
+                Más descargados
+            </button>
+            <button
+                (click)="filterUpcoming()"
+                class="nav-link"
+                [class.active]="activeFilter === 'upcoming'"
+            >
+                Próximamente
+            </button>
+            <button
+                (click)="navigateToAdd()"
+                class="nav-link"
+                [class.active]="activeFilter === 'add'"
+            >
+                Agregar
+            </button>
         </div>
-
         <button (click)="logout()" class="btn btn-logout">Salir</button>
     </div>
 </nav>
@@ -17,15 +42,16 @@
     <div class="container">
         <h2 class="section-title">Catálogo de Juegos</h2>
         <div class="card-grid">
-            <div *ngFor="let card of gameCards" class="game-card-placeholder">
-                <div class="card-header-placeholder"></div>
-                <div class="card-image-placeholder"></div>
-                <div class="card-body-placeholder">
-                    <div class="line short"></div>
-                    <div class="line long"></div>
-                    <div class="line medium"></div>
-                </div>
-                <div class="card-footer-placeholder"></div>
+            <app-game-card
+                *ngFor="let card of displayedGames"
+                [game]="card"
+            ></app-game-card>
+
+            <div
+                *ngIf="displayedGames.length === 0 && activeFilter !== 'all'"
+                class="no-games-message"
+            >
+                No se encontraron juegos para el filtro seleccionado.
             </div>
         </div>
     </div>
