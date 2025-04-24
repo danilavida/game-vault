@@ -13,6 +13,14 @@ export const routes: Routes = [
         component: RegisterComponent
     },
     {
+        path: 'add-game',
+        loadComponent: () =>
+            import('./features/games/components/add-game/add-game.component').then(
+                (c) => c.AddGameComponent
+            )
+        // Puedes añadir Guards aquí también si solo usuarios logueados pueden agregar
+    },
+    {
         path: '',
         redirectTo: 'login',
         pathMatch: 'full'

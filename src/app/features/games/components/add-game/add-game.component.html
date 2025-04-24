@@ -1,1 +1,131 @@
-<p>add-game works!</p>
+<div class="add-game-container">
+    <h2>Agregar nuevo videojuego</h2>
+
+    <form [formGroup]="addGameForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="title">Título:</label>
+            <input
+                type="text"
+                id="title"
+                formControlName="title"
+                placeholder="Ingresa el título del videojuego"
+            />
+            <div
+                *ngIf="title?.invalid && (title?.dirty || title?.touched)"
+                class="error-message"
+            >
+                <small *ngIf="title?.errors?.['required']">El título es requerido.</small>
+                <small *ngIf="title?.errors?.['minlength']"
+                    >El título debe tener al menos 3 caracteres.</small
+                >
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Descripción:</label>
+            <textarea
+                id="description"
+                formControlName="description"
+                rows="4"
+                placeholder="Ingresa la descripción del videojuego"
+            ></textarea>
+            <div
+                *ngIf="
+                    description?.invalid && (description?.dirty || description?.touched)
+                "
+                class="error-message"
+            >
+                <small *ngIf="description?.errors?.['required']"
+                    >La descripción es requerida.</small
+                >
+                <small *ngIf="description?.errors?.['maxlength']"
+                    >La descripción no puede exceder los 500 caracteres.</small
+                >
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="releaseDate">Fecha de lanzamiento:</label>
+            <input
+                type="text"
+                id="releaseDate"
+                formControlName="releaseDate"
+                placeholder="Ej: 15/mayo/2024 o YYYY-MM-DD"
+            />
+            <div
+                *ngIf="
+                    releaseDate?.invalid && (releaseDate?.dirty || releaseDate?.touched)
+                "
+                class="error-message"
+            >
+                <small *ngIf="releaseDate?.errors?.['required']"
+                    >La fecha de lanzamiento es requerida.</small
+                >
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="rating">Clasificación (0-5):</label>
+            <input
+                type="number"
+                id="rating"
+                formControlName="rating"
+                min="0"
+                max="5"
+                step="0.1"
+            />
+            <div
+                *ngIf="rating?.invalid && (rating?.dirty || rating?.touched)"
+                class="error-message"
+            >
+                <small *ngIf="rating?.errors?.['required']"
+                    >La clasificación es requerida.</small
+                >
+                <small *ngIf="rating?.errors?.['min'] || rating?.errors?.['max']"
+                    >La clasificación debe estar entre 0 y 5.</small
+                >
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="downloads">Número de descargas:</label>
+            <input type="number" id="downloads" formControlName="downloads" min="0" />
+            <div
+                *ngIf="downloads?.invalid && (downloads?.dirty || downloads?.touched)"
+                class="error-message"
+            >
+                <small *ngIf="downloads?.errors?.['required']"
+                    >El número de descargas es requerido.</small
+                >
+                <small *ngIf="downloads?.errors?.['min']"
+                    >El número de descargas no puede ser negativo.</small
+                >
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="image">URL de la Imagen:</label>
+            <input
+                type="url"
+                id="image"
+                formControlName="image"
+                placeholder="https://ejemplo.com/imagen.jpg"
+            />
+        </div>
+
+        <div class="form-group form-check">
+            <input
+                type="checkbox"
+                id="comingSoon"
+                formControlName="comingSoon"
+                class="form-check-input"
+            />
+            <label for="comingSoon" class="form-check-label">Próximamente</label>
+        </div>
+
+        <button type="submit" class="btn btn-submit" [disabled]="addGameForm.invalid">
+            Agregar
+        </button>
+        <button type="button" class="btn btn-cancel" (click)="cancel()">Cancelar</button>
+    </form>
+</div>

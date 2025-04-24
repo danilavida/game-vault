@@ -1,0 +1,136 @@
+// src/app/features/games/components/add-game/add-game.component.scss
+
+// --- Importar variables globales si las tienes ---
+// @import '../../../../../styles/variables'; // Ajusta la ruta
+
+// --- Si no, definir algunas básicas ---
+$primary-color: #001f3f;
+$success-color: #28a745;
+$danger-color: #dc3545;
+$text-color: #212529;
+$border-color: #dee2e6;
+$background-color: #f4f7f6;
+$spacer-md: 1rem;
+$spacer-sm: 0.5rem;
+$border-radius: 0.375rem;
+
+// --- Estilos del Contenedor ---
+.add-game-container {
+    max-width: 700px; // Ancho máximo del formulario
+    margin: 2rem auto; // Centrar y dar espacio arriba/abajo
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: $border-radius * 2;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+    h2 {
+        color: $primary-color;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+}
+
+// --- Estilos del Formulario ---
+form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacer-md; // Espacio entre grupos de formulario
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacer-sm * 0.5; // Espacio entre label e input
+
+    label {
+        font-weight: bold;
+        color: $primary-color;
+        margin-bottom: $spacer-sm * 0.25;
+    }
+
+    input[type='text'],
+    input[type='number'],
+    input[type='url'],
+    textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        font-size: 1rem;
+        box-sizing: border-box; // Importante para padding
+
+        &:focus {
+            outline: none;
+            border-color: darken($primary-color, 10%);
+            box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+        }
+
+        // Estilo para inputs inválidos después de ser tocados
+        &.ng-invalid.ng-touched {
+            border-color: $danger-color;
+        }
+    }
+
+    textarea {
+        resize: vertical; // Permitir redimensionar verticalmente
+    }
+}
+
+// --- Estilo para Checkbox ---
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: $spacer-sm;
+
+    label {
+        margin-bottom: 0; // Resetear margen para alinear con checkbox
+        font-weight: normal; // Hacer la label del check normal
+        color: $text-color;
+    }
+
+    input[type='checkbox'] {
+        width: auto; // Resetear ancho para checkbox
+    }
+}
+
+// --- Mensajes de Error ---
+.error-message {
+    color: $danger-color;
+    font-size: 0.85rem;
+    margin-top: $spacer-sm * 0.25;
+}
+
+// --- Estilos de Botones ---
+button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+    margin-top: $spacer-md; // Espacio antes de los botones
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+.btn-submit {
+    background-color: $success-color;
+    color: #fff;
+
+    &:hover:not(:disabled) {
+        background-color: darken($success-color, 10%);
+    }
+}
+
+.btn-cancel {
+    background-color: #6c757d; // Gris
+    color: #fff;
+    margin-left: $spacer-sm; // Espacio entre botones
+
+    &:hover:not(:disabled) {
+        background-color: darken(#6c757d, 10%);
+    }
+}

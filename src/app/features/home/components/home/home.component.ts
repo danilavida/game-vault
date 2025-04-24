@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core'
+// src/app/features/home/components/home/home.component.ts
+import { Component, OnInit, OnDestroy, inject } from '@angular/core' // Añade OnDestroy
 import { CommonModule } from '@angular/common'
 import { Router } from '@angular/router'
 import { Game } from '../../../../shared/models/game.model'
 import { GameCardComponent } from '../../../../shared/components/game-card/game-card.component'
+import { GameService } from '../../../../shared/services/game.service' // Importa GameService
+import { Subscription } from 'rxjs' // Importa Subscription
 
 @Component({
     selector: 'app-home',
@@ -11,101 +14,66 @@ import { GameCardComponent } from '../../../../shared/components/game-card/game-
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
-    allGameCards: Game[] = [
-        {
-            title: 'The Soccer 2024',
-            description:
-                'Es un videojuego de fútbol desarrollado por freeDev, está próximo a ser lanzado para las plataformas más populares...',
-            releaseDate: '29/octubre/2024',
-            image: 'https://placehold.co/600x400/001f3f/FFF?text=Game+Image+1',
-            rating: 5,
-            downloads: 15000,
-            comingSoon: false
-        },
-        {
-            title: 'Aventura Espacial X',
-            description:
-                'Explora galaxias desconocidas en este emocionante juego de ciencia ficción. Pilota tu nave, comercia con alienígenas...',
-            releaseDate: '15/mayo/2024',
-            image: 'https://placehold.co/600x400/17a2b8/FFF?text=Game+Image+2',
-            rating: 4.9,
-            downloads: 8500,
-            comingSoon: true
-        },
-        {
-            title: 'Mundo de Fantasía RPG',
-            description:
-                'Sumérgete en un vasto mundo de magia, dragones y héroes. Personaliza tu personaje y embárcate en misiones épicas.',
-            releaseDate: '01/enero/2025',
-            image: 'https://placehold.co/600x400/ffc107/000?text=Game+Image+3',
-            rating: 4.8,
-            downloads: 0,
-            comingSoon: true
-        },
-        {
-            title: 'Carreras Urbanas Nitro',
-            description:
-                'Compite en carreras callejeras ilegales por la ciudad. Modifica tu coche y demuestra quién es el rey del asfalto.',
-            releaseDate: '10/marzo/2024',
-            image: 'https://placehold.co/600x400/dc3545/FFF?text=Game+Image+4',
-            rating: 4.7,
-            downloads: 11200,
-            comingSoon: false
-        },
-        {
-            title: 'Puzzle Quest Deluxe',
-            description:
-                'Resuelve cientos de ingeniosos puzzles en este adictivo juego. Desbloquea nuevos niveles y desafíos.',
-            releaseDate: '05/febrero/2024',
-            image: 'https://placehold.co/600x400/28a745/FFF?text=Game+Image+5',
-            rating: 4.6,
-            downloads: 25000,
-            comingSoon: false
-        },
-        {
-            title: 'Simulador de Granja Feliz',
-            description:
-                'Cultiva tus propios vegetales, cría animales y expande tu granja en este relajante simulador.',
-            releaseDate: '20/abril/2024',
-            image: 'https://placehold.co/600x400/6c757d/FFF?text=Game+Image+6',
-            rating: 3,
-            downloads: 9800,
-            comingSoon: true
-        },
-        {
-            title: 'Plataformas Pixeladas',
-            description:
-                'Un clásico juego de plataformas con estética retro. Salta, corre y derrota enemigos para salvar el reino.',
-            releaseDate: '01/junio/2024',
-            image: 'https://placehold.co/600x400/001f3f/FFF?text=Game+Image+7',
-            rating: 2,
-            downloads: 13,
-            comingSoon: false
-        },
-        {
-            title: 'Horror Cósmico: El Despertar',
-            description:
-                'Investiga extraños sucesos en una estación espacial abandonada. ¿Podrás sobrevivir a los horrores que acechan?',
-            releaseDate: '31/octubre/2024',
-            image: 'https://placehold.co/600x400/343a40/FFF?text=Game+Image+8',
-            rating: 1.5,
-            downloads: 50,
-            comingSoon: false
-        }
-    ]
+export class HomeComponent implements OnInit, OnDestroy {
+    // Implementa OnDestroy
 
+    // --- Ya no necesitamos la lista hardcodeada aquí ---
+    // allGameCards: Game[] = [ ... ];
+
+    private gameService = inject(GameService) // Inyecta GameService
+    private router = inject(Router)
+
+    allGames: Game[] = [] // Lista para almacenar todos los juegos del servicio
     displayedGames: Game[] = []
     activeFilter: 'all' | 'popular' | 'downloaded' | 'upcoming' | 'add' = 'all'
 
-    constructor(private router: Router) {}
+    private gamesSubscription: Subscription | null = null // Para manejar la suscripción
+
+    constructor() {} // El constructor puede estar vacío si usas inject()
 
     ngOnInit(): void {
-        this.showAllGames()
+        // Suscríbete al observable de juegos del servicio
+        this.gamesSubscription = this.gameService.games$.subscribe((games) => {
+            console.log('Juegos recibidos del servicio:', games)
+            this.allGames = games // Guarda la lista completa
+            // Vuelve a aplicar el filtro activo cada vez que la lista cambie
+            // o simplemente muestra todos por defecto la primera vez
+            if (this.activeFilter === 'all') {
+                this.showAllGames()
+            } else {
+                this.applyCurrentFilter() // Necesitamos un método para reaplicar el filtro
+            }
+        })
+    }
+
+    ngOnDestroy(): void {
+        // Desuscríbete para evitar fugas de memoria
+        this.gamesSubscription?.unsubscribe()
+    }
+
+    // Método para reaplicar el filtro actual cuando los datos cambian
+    applyCurrentFilter(): void {
+        switch (this.activeFilter) {
+            case 'popular':
+                this.filterPopular()
+                break
+            case 'downloaded':
+                this.filterDownloaded()
+                break
+            case 'upcoming':
+                this.filterUpcoming()
+                break
+            case 'add':
+                this.displayedGames = []
+                break // O manejar como corresponda
+            default:
+                this.showAllGames() // Incluye 'all'
+        }
     }
 
     showAllGames(): void {
-        this.displayedGames = [...this.allGameCards].sort((a, b) =>
+        // Ahora ordena la lista obtenida del servicio
+        this.displayedGames = [...this.allGames].sort((a, b) =>
             a.title.localeCompare(b.title)
         )
         this.activeFilter = 'all'
@@ -113,7 +81,8 @@ export class HomeComponent implements OnInit {
     }
 
     filterPopular(): void {
-        this.displayedGames = this.allGameCards
+        // Filtra y ordena desde this.allGames
+        this.displayedGames = this.allGames
             .filter((game) => game.rating > 4)
             .sort((a, b) => b.rating - a.rating)
         this.activeFilter = 'popular'
@@ -121,7 +90,8 @@ export class HomeComponent implements OnInit {
     }
 
     filterDownloaded(): void {
-        this.displayedGames = this.allGameCards
+        // Filtra y ordena desde this.allGames
+        this.displayedGames = this.allGames
             .filter((game) => (game.downloads ?? 0) > 100)
             .sort((a, b) => (b.downloads ?? 0) - (a.downloads ?? 0))
         this.activeFilter = 'downloaded'
@@ -129,7 +99,8 @@ export class HomeComponent implements OnInit {
     }
 
     filterUpcoming(): void {
-        this.displayedGames = this.allGameCards
+        // Filtra y ordena desde this.allGames
+        this.displayedGames = this.allGames
             .filter((game) => game.comingSoon === true)
             .sort((a, b) => a.releaseDate.localeCompare(b.releaseDate))
         this.activeFilter = 'upcoming'
@@ -137,10 +108,9 @@ export class HomeComponent implements OnInit {
     }
 
     navigateToAdd(): void {
-        this.activeFilter = 'add'
-        console.log('Navegando/Activando sección Agregar...')
-        // this.router.navigate(['/add-game']);
-        // this.displayedGames = []; // Limpiar si no se navega
+        // --- ACTUALIZADO: Navegar a la ruta ---
+        this.router.navigate(['/add-game'])
+        // Ya no necesitamos cambiar activeFilter aquí ni limpiar displayedGames manualmente
     }
 
     logout(): void {
@@ -149,7 +119,7 @@ export class HomeComponent implements OnInit {
     }
 
     trackByGameId(index: number, game: Game): string | number {
-        console.log('Tracking by index:', index)
+        // console.log('Tracking game:', game.id ?? game.title); // Log opcional
         return game.id ?? game.title
     }
 }
