@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
                 'Es un videojuego de fútbol desarrollado por freeDev, está próximo a ser lanzado para las plataformas más populares...',
             releaseDate: '29/octubre/2024',
             image: 'https://placehold.co/600x400/001f3f/FFF?text=Game+Image+1',
-            rating: 5, // > 4
+            rating: 5,
             downloads: 15000,
             comingSoon: false
         },
@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
                 'Explora galaxias desconocidas en este emocionante juego de ciencia ficción. Pilota tu nave, comercia con alienígenas...',
             releaseDate: '15/mayo/2024',
             image: 'https://placehold.co/600x400/17a2b8/FFF?text=Game+Image+2',
-            rating: 4.9, // <= 4
+            rating: 4.9,
             downloads: 8500,
             comingSoon: false
         },
@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
                 'Sumérgete en un vasto mundo de magia, dragones y héroes. Personaliza tu personaje y embárcate en misiones épicas.',
             releaseDate: '01/enero/2025',
             image: 'https://placehold.co/600x400/ffc107/000?text=Game+Image+3',
-            rating: 4.8, // > 4
+            rating: 4.8,
             downloads: 0,
             comingSoon: true
         },
@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
                 'Compite en carreras callejeras ilegales por la ciudad. Modifica tu coche y demuestra quién es el rey del asfalto.',
             releaseDate: '10/marzo/2024',
             image: 'https://placehold.co/600x400/dc3545/FFF?text=Game+Image+4',
-            rating: 4.7, // <= 4
+            rating: 4.7,
             downloads: 11200,
             comingSoon: false
         },
@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
                 'Resuelve cientos de ingeniosos puzzles en este adictivo juego. Desbloquea nuevos niveles y desafíos.',
             releaseDate: '05/febrero/2024',
             image: 'https://placehold.co/600x400/28a745/FFF?text=Game+Image+5',
-            rating: 4.6, // > 4
+            rating: 4.6,
             downloads: 25000,
             comingSoon: false
         },
@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
                 'Cultiva tus propios vegetales, cría animales y expande tu granja en este relajante simulador.',
             releaseDate: '20/abril/2024',
             image: 'https://placehold.co/600x400/6c757d/FFF?text=Game+Image+6',
-            rating: 3, // > 4
+            rating: 3,
             downloads: 9800,
             comingSoon: false
         },
@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
                 'Un clásico juego de plataformas con estética retro. Salta, corre y derrota enemigos para salvar el reino.',
             releaseDate: '01/junio/2024',
             image: 'https://placehold.co/600x400/001f3f/FFF?text=Game+Image+7',
-            rating: 2, // > 4
+            rating: 2,
             downloads: 13,
             comingSoon: false
         },
@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
                 'Investiga extraños sucesos en una estación espacial abandonada. ¿Podrás sobrevivir a los horrores que acechan?',
             releaseDate: '31/octubre/2024',
             image: 'https://placehold.co/600x400/343a40/FFF?text=Game+Image+8',
-            rating: 1.5, // <= 4
+            rating: 1.5,
             downloads: 50,
             comingSoon: false
         }
@@ -105,7 +105,6 @@ export class HomeComponent implements OnInit {
     }
 
     showAllGames(): void {
-        // Ordenar por título alfabéticamente como ejemplo por defecto
         this.displayedGames = [...this.allGameCards].sort((a, b) =>
             a.title.localeCompare(b.title)
         )
@@ -114,28 +113,27 @@ export class HomeComponent implements OnInit {
     }
 
     filterPopular(): void {
-        // Filtrar y LUEGO ordenar por rating descendente
         this.displayedGames = this.allGameCards
             .filter((game) => game.rating > 4)
-            .sort((a, b) => b.rating - a.rating) // <-- Orden descendente por rating
+            .sort((a, b) => b.rating - a.rating)
         this.activeFilter = 'popular'
         console.log('Filtrando por populares (rating > 4, orden descendente)')
     }
 
     filterDownloaded(): void {
         this.displayedGames = this.allGameCards
-            .filter((game) => (game.downloads ?? 0) > 0) // Mostrar si tiene alguna descarga
-            .sort((a, b) => (b.downloads ?? 0) - (a.downloads ?? 0)) // Ordenar por descargas
+            .filter((game) => (game.downloads ?? 0) > 100)
+            .sort((a, b) => (b.downloads ?? 0) - (a.downloads ?? 0))
         this.activeFilter = 'downloaded'
-        console.log('Filtrando por más descargados (orden descendente)')
+        console.log('Filtrando por más descargados (downloads > 100, orden descendente)')
     }
 
     filterUpcoming(): void {
         this.displayedGames = this.allGameCards
             .filter((game) => game.comingSoon === true)
-            .sort((a, b) => a.releaseDate.localeCompare(b.releaseDate)) // Ordenar por fecha (simple)
+            .sort((a, b) => a.releaseDate.localeCompare(b.releaseDate))
         this.activeFilter = 'upcoming'
-        console.log('Filtrando por próximamente (ordenado por fecha)')
+        console.log('Filtrando por próximamente (comingSoon = true, ordenado por fecha)')
     }
 
     navigateToAdd(): void {
