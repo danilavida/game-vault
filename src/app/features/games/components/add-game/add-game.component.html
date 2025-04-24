@@ -1,131 +1,211 @@
-<div class="add-game-container">
-    <h2>Agregar nuevo videojuego</h2>
-
-    <form [formGroup]="addGameForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="title">Título:</label>
-            <input
-                type="text"
-                id="title"
-                formControlName="title"
-                placeholder="Ingresa el título del videojuego"
-            />
-            <div
-                *ngIf="title?.invalid && (title?.dirty || title?.touched)"
-                class="error-message"
-            >
-                <small *ngIf="title?.errors?.['required']">El título es requerido.</small>
-                <small *ngIf="title?.errors?.['minlength']"
-                    >El título debe tener al menos 3 caracteres.</small
+<div class="add-game-page-container d-flex align-items-center justify-content-center">
+    <div class="add-game-card card p-xl">
+        <h3 class="text-center mb-lg">Agregar Nuevo Videojuego</h3>
+        <form (ngSubmit)="onSubmit(addGameNgForm)" #addGameNgForm="ngForm" novalidate>
+            <div class="form-group mb-md">
+                <label for="title" class="form-label d-block mb-sm">Título</label>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    class="form-control"
+                    placeholder="Ingresa el título del videojuego"
+                    required
+                    minlength="3"
+                    [(ngModel)]="addGameData.title"
+                    #titleInput="ngModel"
+                    [class.is-invalid]="
+                        titleInput.invalid && (titleInput.dirty || titleInput.touched)
+                    "
+                />
+                <div
+                    *ngIf="titleInput.invalid && (titleInput.dirty || titleInput.touched)"
+                    class="invalid-feedback mt-xs"
                 >
+                    <div *ngIf="titleInput.errors?.['required']">
+                        El título es requerido.
+                    </div>
+                    <div *ngIf="titleInput.errors?.['minlength']">
+                        Debe tener al menos 3 caracteres.
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="description">Descripción:</label>
-            <textarea
-                id="description"
-                formControlName="description"
-                rows="4"
-                placeholder="Ingresa la descripción del videojuego"
-            ></textarea>
-            <div
-                *ngIf="
-                    description?.invalid && (description?.dirty || description?.touched)
-                "
-                class="error-message"
-            >
-                <small *ngIf="description?.errors?.['required']"
-                    >La descripción es requerida.</small
+            <div class="form-group mb-md">
+                <label for="description" class="form-label d-block mb-sm"
+                    >Descripción</label
                 >
-                <small *ngIf="description?.errors?.['maxlength']"
-                    >La descripción no puede exceder los 500 caracteres.</small
+                <textarea
+                    id="description"
+                    name="description"
+                    class="form-control"
+                    rows="4"
+                    placeholder="Ingresa la descripción del videojuego"
+                    required
+                    maxlength="500"
+                    [(ngModel)]="addGameData.description"
+                    #descriptionInput="ngModel"
+                    [class.is-invalid]="
+                        descriptionInput.invalid &&
+                        (descriptionInput.dirty || descriptionInput.touched)
+                    "
+                ></textarea>
+                <div
+                    *ngIf="
+                        descriptionInput.invalid &&
+                        (descriptionInput.dirty || descriptionInput.touched)
+                    "
+                    class="invalid-feedback mt-xs"
                 >
+                    <div *ngIf="descriptionInput.errors?.['required']">
+                        La descripción es requerida.
+                    </div>
+                    <div *ngIf="descriptionInput.errors?.['maxlength']">
+                        No puede exceder los 500 caracteres.
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="releaseDate">Fecha de lanzamiento:</label>
-            <input
-                type="text"
-                id="releaseDate"
-                formControlName="releaseDate"
-                placeholder="Ej: 15/mayo/2024 o YYYY-MM-DD"
-            />
-            <div
-                *ngIf="
-                    releaseDate?.invalid && (releaseDate?.dirty || releaseDate?.touched)
-                "
-                class="error-message"
-            >
-                <small *ngIf="releaseDate?.errors?.['required']"
-                    >La fecha de lanzamiento es requerida.</small
+            <div class="form-group mb-md">
+                <label for="releaseDate" class="form-label d-block mb-sm"
+                    >Fecha de lanzamiento</label
                 >
+                <input
+                    type="text"
+                    id="releaseDate"
+                    name="releaseDate"
+                    class="form-control"
+                    placeholder="Ej: 15/mayo/2024 o YYYY-MM-DD"
+                    required
+                    [(ngModel)]="addGameData.releaseDate"
+                    #releaseDateInput="ngModel"
+                    [class.is-invalid]="
+                        releaseDateInput.invalid &&
+                        (releaseDateInput.dirty || releaseDateInput.touched)
+                    "
+                />
+                <div
+                    *ngIf="
+                        releaseDateInput.invalid &&
+                        (releaseDateInput.dirty || releaseDateInput.touched)
+                    "
+                    class="invalid-feedback mt-xs"
+                >
+                    <div *ngIf="releaseDateInput.errors?.['required']">
+                        La fecha es requerida.
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="rating">Clasificación (0-5):</label>
-            <input
-                type="number"
-                id="rating"
-                formControlName="rating"
-                min="0"
-                max="5"
-                step="0.1"
-            />
-            <div
-                *ngIf="rating?.invalid && (rating?.dirty || rating?.touched)"
-                class="error-message"
-            >
-                <small *ngIf="rating?.errors?.['required']"
-                    >La clasificación es requerida.</small
+            <div class="form-group mb-md">
+                <label for="rating" class="form-label d-block mb-sm"
+                    >Clasificación (0-5)</label
                 >
-                <small *ngIf="rating?.errors?.['min'] || rating?.errors?.['max']"
-                    >La clasificación debe estar entre 0 y 5.</small
+                <input
+                    type="number"
+                    id="rating"
+                    name="rating"
+                    class="form-control"
+                    min="0"
+                    max="5"
+                    step="0.1"
+                    required
+                    [(ngModel)]="addGameData.rating"
+                    #ratingInput="ngModel"
+                    [class.is-invalid]="
+                        ratingInput.invalid && (ratingInput.dirty || ratingInput.touched)
+                    "
+                />
+                <div
+                    *ngIf="
+                        ratingInput.invalid && (ratingInput.dirty || ratingInput.touched)
+                    "
+                    class="invalid-feedback mt-xs"
                 >
+                    <div *ngIf="ratingInput.errors?.['required']">
+                        La clasificación es requerida.
+                    </div>
+                    <div
+                        *ngIf="ratingInput.errors?.['min'] || ratingInput.errors?.['max']"
+                    >
+                        Debe estar entre 0 y 5.
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="downloads">Número de descargas:</label>
-            <input type="number" id="downloads" formControlName="downloads" min="0" />
-            <div
-                *ngIf="downloads?.invalid && (downloads?.dirty || downloads?.touched)"
-                class="error-message"
-            >
-                <small *ngIf="downloads?.errors?.['required']"
-                    >El número de descargas es requerido.</small
+            <div class="form-group mb-md">
+                <label for="downloads" class="form-label d-block mb-sm"
+                    >Número de descargas</label
                 >
-                <small *ngIf="downloads?.errors?.['min']"
-                    >El número de descargas no puede ser negativo.</small
+                <input
+                    type="number"
+                    id="downloads"
+                    name="downloads"
+                    class="form-control"
+                    min="0"
+                    required
+                    [(ngModel)]="addGameData.downloads"
+                    #downloadsInput="ngModel"
+                    [class.is-invalid]="
+                        downloadsInput.invalid &&
+                        (downloadsInput.dirty || downloadsInput.touched)
+                    "
+                />
+                <div
+                    *ngIf="
+                        downloadsInput.invalid &&
+                        (downloadsInput.dirty || downloadsInput.touched)
+                    "
+                    class="invalid-feedback mt-xs"
                 >
+                    <div *ngIf="downloadsInput.errors?.['required']">
+                        El número de descargas es requerido.
+                    </div>
+                    <div *ngIf="downloadsInput.errors?.['min']">
+                        No puede ser negativo.
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="image">URL de la Imagen:</label>
-            <input
-                type="url"
-                id="image"
-                formControlName="image"
-                placeholder="https://ejemplo.com/imagen.jpg"
-            />
-        </div>
+            <div class="form-group mb-md">
+                <label for="image" class="form-label d-block mb-sm"
+                    >URL de la Imagen</label
+                >
+                <input
+                    type="url"
+                    id="image"
+                    name="image"
+                    class="form-control"
+                    placeholder="https://ejemplo.com/imagen.jpg"
+                    [(ngModel)]="addGameData.image"
+                    #imageInput="ngModel"
+                />
+            </div>
 
-        <div class="form-group form-check">
-            <input
-                type="checkbox"
-                id="comingSoon"
-                formControlName="comingSoon"
-                class="form-check-input"
-            />
-            <label for="comingSoon" class="form-check-label">Próximamente</label>
-        </div>
+            <div class="form-group form-check mb-lg">
+                <input
+                    type="checkbox"
+                    id="comingSoon"
+                    name="comingSoon"
+                    class="form-check-input"
+                    [(ngModel)]="addGameData.comingSoon"
+                    #comingSoonInput="ngModel"
+                />
+                <label for="comingSoon" class="form-check-label">Próximamente</label>
+            </div>
 
-        <button type="submit" class="btn btn-submit" [disabled]="addGameForm.invalid">
-            Agregar
-        </button>
-        <button type="button" class="btn btn-cancel" (click)="cancel()">Cancelar</button>
-    </form>
+            <div class="d-flex justify-content-center gap-md">
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="addGameNgForm.invalid"
+                >
+                    Agregar Videojuego
+                </button>
+                <button type="button" class="btn btn-secondary" (click)="cancel()">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
