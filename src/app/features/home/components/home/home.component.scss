@@ -32,8 +32,8 @@ $font-size-lg: $font-size-base * 1.25;
 $font-weight-bold: 700;
 $font-weight-normal: 400;
 
-$transition-duration: 0.2s;
-$transition-base: all $transition-duration ease-in-out;
+$transition-duration: 0.1s;
+$transition-base: all $transition-duration ease-out;
 
 $box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 // --- End Variables ---
@@ -86,6 +86,7 @@ $box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     transition: $transition-base;
     border-radius: $border-radius-sm;
     font-weight: $font-weight-normal; // Estado normal
+    border-bottom: 2px solid transparent; // Border for active state
 
     &:hover {
         background-color: rgba($navbar-text-color, 0.1); // Slight background on hover
@@ -96,6 +97,7 @@ $box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     &.active {
         font-weight: $font-weight-bold; // Letra en negrita
         color: $navbar-active-text-color; // Color dorado para el texto
+        border-bottom-color: $accent-color;
         // Opcional: añadir un borde inferior o cambiar fondo si se desea más énfasis
         // border-bottom: 2px solid $navbar-active-text-color;
         // background-color: rgba($navbar-active-text-color, 0.1);
