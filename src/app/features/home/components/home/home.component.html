@@ -43,7 +43,7 @@
         <h2 class="section-title">Catálogo de Juegos</h2>
         <div class="card-grid">
             <app-game-card
-                *ngFor="let card of displayedGames"
+                *ngFor="let card of displayedGames; trackBy: trackByGameId"
                 [game]="card"
             ></app-game-card>
 

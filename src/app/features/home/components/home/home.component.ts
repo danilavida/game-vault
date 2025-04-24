@@ -147,4 +147,9 @@ export class HomeComponent implements OnInit {
         console.log('Cerrando sesión...')
         this.router.navigate(['/login'])
     }
+
+    trackByGameId(index: number, game: Game): string | number {
+        console.log('Tracking by index:', index)
+        return game.id ?? game.title
+    }
 }
