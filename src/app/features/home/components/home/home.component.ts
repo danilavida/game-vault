@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
             image: 'https://placehold.co/600x400/17a2b8/FFF?text=Game+Image+2',
             rating: 4.9,
             downloads: 8500,
-            comingSoon: false
+            comingSoon: true
         },
         {
             title: 'Mundo de Fantasía RPG',
@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
             image: 'https://placehold.co/600x400/6c757d/FFF?text=Game+Image+6',
             rating: 3,
             downloads: 9800,
-            comingSoon: false
+            comingSoon: true
         },
         {
             title: 'Plataformas Pixeladas',
