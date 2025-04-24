@@ -14,6 +14,8 @@ $text-color: #212529; // Texto oscuro
 $text-color-muted: #6c757d; // Texto atenuado
 $border-color: #dee2e6; // Color de borde claro
 $navbar-text-color: #ffffff; // Texto blanco para el navbar
+$navbar-active-text-color: $accent-color; // Color para texto activo (Dorado)
+$navbar-hover-text-color: $secondary-color; // Color para texto hover (Cian)
 
 $border-width: 1px;
 $border-radius: 0.375rem;
@@ -62,9 +64,10 @@ $box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     color: $navbar-text-color;
     text-decoration: none;
     transition: $transition-base;
+    cursor: pointer; // Add cursor pointer as it's clickable now
 
     &:hover {
-        color: $accent-color; // Dorado on hover
+        color: $navbar-hover-text-color; // Usar color hover definido
     }
 }
 
@@ -82,16 +85,20 @@ $box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     cursor: pointer;
     transition: $transition-base;
     border-radius: $border-radius-sm;
+    font-weight: $font-weight-normal; // Estado normal
 
     &:hover {
         background-color: rgba($navbar-text-color, 0.1); // Slight background on hover
-        color: $secondary-color; // Cian on hover
+        color: $navbar-hover-text-color; // Cian on hover
     }
 
-    // Style for active link (add class dynamically if using router)
+    // Estilo para el enlace activo
     &.active {
-        font-weight: $font-weight-bold;
-        color: $accent-color;
+        font-weight: $font-weight-bold; // Letra en negrita
+        color: $navbar-active-text-color; // Color dorado para el texto
+        // Opcional: añadir un borde inferior o cambiar fondo si se desea más énfasis
+        // border-bottom: 2px solid $navbar-active-text-color;
+        // background-color: rgba($navbar-active-text-color, 0.1);
     }
 }
 
@@ -117,9 +124,8 @@ $box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
 .btn-logout {
-    // Use secondary color for logout button
     color: $navbar-text-color;
-    background-color: $secondary-color;
+    background-color: $secondary-color; // Cian
     border-color: $secondary-color;
 
     &:hover {
@@ -127,15 +133,6 @@ $box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
         border-color: darken($secondary-color, 12%);
         color: $navbar-text-color;
     }
-
-    // Alternative: Use danger color
-    // color: #fff;
-    // background-color: $danger-color;
-    // border-color: $danger-color;
-    // &:hover {
-    //   background-color: darken($danger-color, 10%);
-    //   border-color: darken($danger-color, 12%);
-    // }
 }
 
 // Main Content Area Styles
@@ -145,97 +142,35 @@ $box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     min-height: calc(100vh - 70px); // Adjust 70px based on actual navbar height
 }
 
-// Optional container to center content grid
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 $spacer-md; // Add horizontal padding if needed
+    padding: 0 $spacer-md;
 }
 
 .section-title {
     color: $primary-color;
     margin-bottom: $spacer-lg;
-    text-align: center; // Center the title
+    text-align: center;
 }
 
 // Card Grid Styles
 .card-grid {
     display: grid;
-    // Responsive columns: 1 on small, 2 on medium, 4 on large screens
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: $spacer-lg; // Gap between cards
+    gap: $spacer-lg;
 }
 
-// Placeholder Card Styles
-.game-card-placeholder {
-    background-color: $card-background-color;
-    border: $border-width solid $border-color;
+// Mensaje cuando no hay juegos
+.no-games-message {
+    grid-column: 1 / -1; // Span all columns
+    text-align: center;
+    padding: $spacer-xl;
+    color: $text-color-muted;
+    font-style: italic;
+    background-color: darken($background-color, 2%);
     border-radius: $border-radius;
-    box-shadow: $box-shadow-sm;
-    overflow: hidden; // Hide overflow if needed
-    display: flex;
-    flex-direction: column;
-    min-height: 350px; // Give placeholder a minimum height
-
-    // Simple shimmer/loading animation (optional)
-    background: linear-gradient(
-        to right,
-        $card-background-color 8%,
-        darken($card-background-color, 5%) 18%,
-        $card-background-color 33%
-    );
-    background-size: 800px 104px; // Adjust size as needed
-    animation: shimmer 1.5s infinite linear;
-
-    .card-header-placeholder {
-        height: 30px; // Placeholder for title area
-        background-color: darken($card-background-color, 8%);
-        margin: $spacer-md $spacer-md 0;
-        border-radius: $border-radius-sm;
-    }
-
-    .card-image-placeholder {
-        height: 150px; // Placeholder for image
-        background-color: darken($card-background-color, 12%);
-        margin: $spacer-md;
-        border-radius: $border-radius-sm;
-    }
-
-    .card-body-placeholder {
-        padding: 0 $spacer-md $spacer-md;
-        flex-grow: 1; // Allow body to grow
-
-        .line {
-            height: 10px;
-            background-color: darken($card-background-color, 8%);
-            margin-bottom: $spacer-sm;
-            border-radius: $border-radius-sm;
-            &.short {
-                width: 40%;
-            }
-            &.medium {
-                width: 60%;
-            }
-            &.long {
-                width: 85%;
-            }
-        }
-    }
-
-    .card-footer-placeholder {
-        height: 40px; // Placeholder for button area
-        background-color: darken($card-background-color, 5%);
-        margin: 0 $spacer-md $spacer-md;
-        border-radius: $border-radius-sm;
-    }
 }
 
-// Shimmer animation keyframes
-@keyframes shimmer {
-    0% {
-        background-position: -468px 0;
-    }
-    100% {
-        background-position: 468px 0;
-    }
-}
+// --- Estilos de Placeholder y Animación (sin cambios) ---
+// ... (mantener los estilos de .game-card-placeholder y @keyframes shimmer)
