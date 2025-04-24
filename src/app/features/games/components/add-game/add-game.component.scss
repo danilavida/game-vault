@@ -1,38 +1,34 @@
 // src/app/features/games/components/add-game/add-game.component.scss
-// VERSIÓN COMPLETA Y AUTOCONTENIDA
-// Incluye todas las definiciones necesarias para que coincida visualmente con RegisterComponent,
-// asumiendo que los estilos globales no se aplican correctamente por alguna razón.
+// VERSIÓN COMPLETA Y AUTOCONTENIDA - Estilo visual como RegisterComponent
 
 // ===============================================
 // 1. Variables SCSS (Copiadas/Adaptadas de Register)
 // ===============================================
 
 // --- Paleta de Colores ---
-$primary-color: #001f3f;
-$secondary-color: #17a2b8; // Puede no usarse aquí, pero para consistencia
-$accent-color: #ffc107; // Puede no usarse aquí, pero para consistencia
+$primary-color: #001f3f; // Azul Marino
+$secondary-color: #17a2b8; // Cian
+$accent-color: #ffc107; // Dorado (Puede no usarse aquí)
 $danger-color: #dc3545; // Rojo para errores
-$success-color: #28a745; // Verde para el botón "Agregar"
+$success-color: #28a745; // Verde (No se usará para botones principales si seguimos el estilo register)
 
-// --- Colores Neutros ---
-$background-color: #f4f7f6; // Fondo claro para la página
-$card-background-color: #ffffff; // Fondo de tarjeta blanco sólido
-$text-color: #212529; // Texto oscuro
+// --- Colores de Tarjeta/Formulario (Como en Register) ---
+$card-bg-color: rgba(255, 255, 255, 0.819); // Fondo tarjeta semi-transparente
+$card-border-color: rgba(0, 0, 0, 0.1); // Borde sutil tarjeta
+$input-bg-color: #f8f9fa; // Fondo input (gris claro)
+$input-focus-bg-color: #ffffff; // Fondo input en focus (blanco)
+$text-color: #212529; // Texto oscuro principal
 $text-color-muted: #6c757d; // Texto atenuado y botón "Cancelar"
-$border-color: #dee2e6; // Color de borde claro para la tarjeta
 $input-border-color: #ced4da; // Borde input
-$input-bg-color: #f8f9fa; // Fondo input (como en register)
-$input-focus-bg-color: #ffffff; // Fondo input en focus (como en register)
 
 // --- Tipografía ---
-// No se necesita definir $font-family-base aquí si se hereda de body globalmente
 $font-size-base: 1rem;
 $font-size-lg: $font-size-base * 1.25;
 $font-size-sm: $font-size-base * 0.875;
 $font-weight-bold: 700;
 $font-weight-normal: 400;
 $line-height-base: 1.5;
-$heading-margin-bottom: 0.5rem; // Consistente con global
+$heading-margin-bottom: 0.5rem;
 
 // --- Espaciado ---
 $spacer-base: 1rem;
@@ -44,89 +40,90 @@ $spacer-xl: $spacer-base * 3;
 
 // --- Bordes ---
 $border-width: 1px;
-$border-radius: 0.375rem; // Radio general
+$border-radius: 0.375rem; // Radio general (como register card)
 $border-radius-sm: 0.25rem; // Radio para inputs/botones
-$border-radius-lg: 0.5rem; // Radio para la tarjeta
+$border-radius-lg: 0.5rem; // Radio más grande (no se usará si usamos el de register)
 
 // --- Transiciones ---
 $transition-duration: 0.2s;
-$transition-base: all $transition-duration ease-in-out; // Transición base
+$transition-base: all $transition-duration ease-in-out;
 
 // --- Sombras ---
-$box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); // Sombra ligera
-$box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); // Sombra estándar (para la tarjeta)
-$box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175); // Sombra grande
+$box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+$box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+$box-shadow-register: 0 0.8rem 10.5rem rgba(0, 0, 0, 0.25); // Sombra como en register
 
 // ===============================================
-// 2. Estilos del Contenedor y Tarjeta
+// 2. Estilos del Contenedor y Tarjeta (Como en Register)
 // ===============================================
 
 .add-game-page-container {
-    min-height: calc(100vh - 70px); // Ajusta 70px a la altura de tu navbar
-    padding: $spacer-lg $spacer-md;
-    display: flex; // Para centrar la tarjeta (usado en HTML)
-    align-items: center; // Para centrar la tarjeta (usado en HTML)
-    justify-content: center; // Para centrar la tarjeta (usado en HTML)
-    background-color: $background-color; // Fondo claro de página
+    min-height: 100vh; // Ocupa toda la altura
+    padding: $spacer-md; // Padding general
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // Fondo degradado como en Register
+    background-color: $primary-color; // Fallback por si el gradiente no carga
+    background-image: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .add-game-card {
-    // Clase .card usada en HTML - Estilos base de tarjeta
-    background-color: $card-background-color;
-    border: $border-width solid $border-color;
-    border-radius: $border-radius-lg; // Radio más grande
-    margin-bottom: $spacer-md; // Margen inferior base
-    box-shadow: $box-shadow; // Sombra estándar
-
-    // Estilos específicos para esta tarjeta
+    // Estilos de tarjeta como en Register
     width: 100%;
-    max-width: 700px;
-    padding: $spacer-xl; // Padding interno amplio (usado en HTML con p-xl)
+    max-width: 700px; // Puede ser más ancha que la de register para acomodar el form
+    background-color: $card-bg-color; // Fondo semi-transparente
+    border: $border-width solid $card-border-color;
+    border-radius: $border-radius; // Radio de borde como el de register
+    padding: $spacer-xl; // Padding amplio (usado en HTML con p-xl)
+    box-shadow: $box-shadow-register; // Sombra como la de register
+    margin-bottom: $spacer-md; // Margen inferior por si acaso
+    backdrop-filter: blur(10px); // Efecto blur como en register
+    -webkit-backdrop-filter: blur(10px); // Prefijo para compatibilidad
 
     h3 {
         color: $primary-color;
-        text-align: center; // Asegurar centrado
-        margin-bottom: $spacer-lg; // Espacio debajo del título (usado en HTML con mb-lg)
         font-size: $font-size-base * 1.75; // Tamaño h3 consistente
         font-weight: $font-weight-bold;
         line-height: 1.2;
+        // text-align: center; // Viene de clase en HTML
+        // margin-bottom: $spacer-lg; // Viene de clase en HTML
     }
 }
 
 // ===============================================
-// 3. Estilos de Formulario Base (Copiados de Register)
+// 3. Estilos de Formulario Base (Copiados/Adaptados de Register)
 // ===============================================
 
-// Contenedor para label + input + error
 .form-group {
     width: 100%;
-    margin-bottom: $spacer-md; // Espacio entre grupos (usado en HTML con mb-md)
+    // margin-bottom: $spacer-md; // Viene de clase en HTML
 }
 
-// Labels
 .form-label {
-    display: block; // (Usado en HTML con d-block)
+    // display: block; // Viene de clase en HTML
     font-weight: $font-weight-bold;
-    color: $text-color;
+    color: $text-color; // Texto oscuro para labels
     font-size: $font-size-sm;
     text-align: left;
-    margin-bottom: $spacer-sm; // Espacio debajo de label (usado en HTML con mb-sm)
+    // margin-bottom: $spacer-sm; // Viene de clase en HTML
 }
 
-// Inputs y Textarea
 .form-control {
     display: block;
     width: 100%;
-    padding: 0.75rem; // Padding interno (ajusta si prefieres el de register 0.5rem 0.75rem)
+    padding: 0.5rem 0.75rem; // Padding como en register
     font-size: $font-size-base;
     font-weight: $font-weight-normal;
     line-height: $line-height-base;
     color: $text-color;
-    background-color: $input-bg-color; // Fondo ligero (como register)
+    background-color: $input-bg-color; // Fondo gris claro inputs
     background-clip: padding-box;
     border: $border-width solid $input-border-color;
     appearance: none;
-    border-radius: $border-radius-sm; // Bordes redondeados pequeños
+    border-radius: $border-radius-sm; // Radio pequeño
     box-sizing: border-box;
     transition: border-color $transition-duration ease-in-out,
         box-shadow $transition-duration ease-in-out,
@@ -134,10 +131,10 @@ $box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175); // Sombra grande
 
     &:focus {
         color: $text-color;
-        background-color: $input-focus-bg-color; // Fondo blanco
-        border-color: darken($primary-color, 10%);
+        background-color: $input-focus-bg-color; // Fondo blanco en focus
+        border-color: $primary-color; // Borde primario en focus
         outline: 0;
-        box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25); // Sombra de foco
+        box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25); // Sombra de foco primaria
     }
 
     &::placeholder {
@@ -145,43 +142,38 @@ $box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175); // Sombra grande
         opacity: 1;
     }
 
-    // Estado inválido (cuando se añade la clase .is-invalid)
     &.is-invalid {
-        border-color: $danger-color;
+        border-color: $danger-color; // Borde rojo
         &:focus {
             box-shadow: 0 0 0 0.2rem rgba($danger-color, 0.25); // Sombra roja
         }
     }
 }
 
-// Ajustes específicos para textarea
 textarea.form-control {
     resize: vertical;
     min-height: 80px;
 }
 
-// Mensajes de Validación
 .invalid-feedback {
-    display: none; // Oculto por defecto
+    display: none;
     width: 100%;
-    margin-top: $spacer-xs; // Espacio sobre el mensaje (usado en HTML con mt-xs)
+    // margin-top: $spacer-xs; // Viene de clase en HTML
     font-size: $font-size-sm;
     color: $danger-color;
     text-align: left;
 }
-// Muestra el feedback cuando el input tiene .is-invalid
-// (Asume que .form-control y .invalid-feedback son hermanos o anidados correctamente)
 .form-control.is-invalid ~ .invalid-feedback {
     display: block;
 }
 
-// Estilos para Checkbox
+// Estilos para Checkbox (Como en Register)
 .form-check {
     display: flex;
     align-items: center;
     gap: $spacer-sm * 0.75;
     padding-left: 0;
-    margin-bottom: $spacer-lg; // Espacio después del checkbox (usado en HTML con mb-lg)
+    // margin-bottom: $spacer-lg; // Viene de clase en HTML
 }
 .form-check-input {
     width: auto;
@@ -193,7 +185,7 @@ textarea.form-control {
 .form-check-label {
     margin-bottom: 0;
     font-weight: $font-weight-normal;
-    color: $text-color;
+    color: $text-color; // Texto normal para label de check
     cursor: pointer;
 }
 
@@ -202,18 +194,19 @@ textarea.form-control {
 // ===============================================
 .btn {
     display: inline-block;
-    font-weight: $font-weight-bold; // Hacemos botones bold por defecto
-    color: $text-color; // Color base (se sobreescribe)
+    // font-weight: $font-weight-normal; // Register usa normal, pero bold queda bien en botones submit/cancel
+    font-weight: $font-weight-bold;
+    color: $text-color;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
     user-select: none;
     background-color: transparent;
     border: $border-width solid transparent;
-    padding: 0.6rem 1.5rem; // Padding ajustado
+    padding: 0.6rem 1.5rem; // Padding un poco mayor para botones principales
     font-size: $font-size-base;
     line-height: $line-height-base;
-    border-radius: $border-radius-sm; // Radio de botón
+    border-radius: $border-radius; // Radio de borde como register card/button
     transition: color $transition-duration ease-in-out,
         background-color $transition-duration ease-in-out,
         border-color $transition-duration ease-in-out,
@@ -229,23 +222,27 @@ textarea.form-control {
         cursor: not-allowed;
     }
 
-    // --- Variante Primaria (Adaptada para "Agregar" - Verde) ---
+    // --- Variante Primaria (Como en Register - Azul Marino) ---
+    // Usado para el botón "Agregar"
     &.btn-primary {
         color: #fff;
-        background-color: $success-color; // Verde
-        border-color: $success-color;
+        background-color: $primary-color; // Azul marino
+        border-color: $primary-color;
 
         &:hover:not(:disabled) {
-            background-color: darken($success-color, 10%);
-            border-color: darken($success-color, 12%);
+            background-color: darken($primary-color, 10%);
+            border-color: darken($primary-color, 12%);
         }
         &:disabled {
-            background-color: $success-color;
-            border-color: $success-color;
+            // Register usa $text-color-muted para el fondo del botón primario deshabilitado
+            background-color: $text-color-muted;
+            border-color: $text-color-muted;
+            // opacity: 0.65; // Ya está en el .btn:disabled general
         }
     }
 
-    // --- Variante Secundaria (Adaptada para "Cancelar" - Gris) ---
+    // --- Variante Secundaria (Gris para Cancelar) ---
+    // Usado para el botón "Cancelar"
     &.btn-secondary {
         color: #fff;
         background-color: $text-color-muted; // Gris
@@ -258,14 +255,14 @@ textarea.form-control {
         &:disabled {
             background-color: $text-color-muted;
             border-color: $text-color-muted;
+            // opacity: 0.65; // Ya está en el .btn:disabled general
         }
     }
-    // Añadir otras variantes (.btn-danger, etc.) si se usan en este componente
+    // Añadir otras variantes (.btn-danger, .btn-success) si se usan en este componente
 }
 
 // ===============================================
 // 5. Clases de Utilidad (Definidas localmente)
-// ADVERTENCIA: Lo ideal es tenerlas en styles.scss global.
 // ===============================================
 .d-flex {
     display: flex !important;
