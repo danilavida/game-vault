@@ -1,20 +1,15 @@
-// src/app/features/auth/components/register/register.component.scss
-// Estilos para el componente Register, adaptados desde login.component.scss para consistencia.
+$primary-color: #001f3f;
+$secondary-color: #17a2b8;
+$accent-color: #ffc107;
+$danger-color: #dc3545;
 
-// --- Definiciones locales (Iguales a Login) ---
-$primary-color: #001f3f; // Azul Marino
-$secondary-color: #17a2b8; // Cian
-$accent-color: #ffc107; // Dorado
-$danger-color: #dc3545; // Rojo para errores
-
-$card-bg-color: rgba(255, 255, 255, 0.819); // Fondo de tarjeta blanco semi-transparente
-$card-border-color: rgba(0, 0, 0, 0.1); // Borde sutil
+$card-bg-color: rgba(255, 255, 255, 0.819);
+$card-border-color: rgba(0, 0, 0, 0.1);
 $input-bg-color: #f8f9fa;
 $input-focus-bg-color: #ffffff;
 $text-color: #212529;
 $text-color-muted: #6c757d;
 $input-border-color: #ced4da;
-// Variables para el avatar (copiadas de login.scss)
 $avatar-placeholder-bg: #e9ecef;
 $avatar-icon-color: $primary-color;
 
@@ -35,32 +30,29 @@ $font-weight-normal: 400;
 $line-height-base: 1.5;
 
 $transition-duration: 0.2s;
-// --- Fin Definiciones locales ---
 
-// Container principal
 .register-container {
     min-height: 100vh;
     padding: $spacer-md;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $primary-color; // Fallback
+    background-color: $primary-color;
     background-image: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
     background-size: cover;
     background-repeat: no-repeat;
 }
 
-// Estilos para la tarjeta
 .register-card {
     width: 100%;
-    max-width: 480px; // Puede ser un poco más ancha que la de login
+    max-width: 480px;
     background-color: $card-bg-color;
     border: $border-width solid $card-border-color;
     border-radius: $border-radius;
     padding: $spacer-xl;
-    box-shadow: 0 0.8rem 10.5rem rgba(0, 0, 0, 0.25); // Sombra consistente
+    box-shadow: 0 0.8rem 10.5rem rgba(0, 0, 0, 0.25);
     margin-bottom: $spacer-md;
-    backdrop-filter: blur(10px); // Efecto blur consistente
+    backdrop-filter: blur(10px);
     // -webkit-backdrop-filter: blur(10px);
 
     display: flex;
@@ -68,25 +60,23 @@ $transition-duration: 0.2s;
     align-items: center;
 }
 
-// Estilos para el placeholder del avatar (adaptado de login.scss)
 .register-avatar-placeholder {
-    // Nombre de clase específico para registro
-    width: 150px; // Tamaño consistente con login
+    width: 150px;
     height: 150px;
     background-color: $avatar-placeholder-bg;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 3px solid $card-bg-color; // Borde consistente
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Sombra consistente
+    border: 3px solid $card-bg-color;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     overflow: hidden;
 
     .avatar-icon {
-        width: 140px; // Tamaño consistente
+        width: 140px;
         height: 140px;
-        color: $avatar-icon-color; // Color consistente
+        color: $avatar-icon-color;
     }
 
     img {
@@ -95,8 +85,6 @@ $transition-duration: 0.2s;
         object-fit: cover;
     }
 }
-
-// --- Estilos de Formulario (Consistentes con Login) ---
 
 .text-center {
     text-align: center !important;
@@ -237,9 +225,7 @@ $transition-duration: 0.2s;
     color: $text-color-muted !important;
 }
 
-// Ajustes para enlaces dentro de la tarjeta (adaptado)
 .register-card a {
-    // Selector adaptado a la tarjeta de registro
     color: $secondary-color;
     font-weight: $font-weight-bold;
     text-decoration: none;
