@@ -18,7 +18,6 @@ export const routes: Routes = [
             import('./features/games/components/add-game/add-game.component').then(
                 (c) => c.AddGameComponent
             )
-        // Puedes añadir Guards aquí también si solo usuarios logueados pueden agregar
     },
     {
         path: '',

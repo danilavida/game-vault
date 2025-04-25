@@ -1,10 +1,8 @@
-// src/app/shared/models/game.model.ts
-
 export interface Game {
     id?: string | number
     title: string
     description: string
-    releaseDate: string // Considerar usar Date type
+    releaseDate: string
     image: string
     rating: number
     downloads?: number

@@ -1,6 +1,3 @@
-// src/app/shared/components/game-card/game-card.component.scss
-// Styles for the reusable GameCardComponent.
-
 $primary-color: #001f3f;
 $secondary-color: #17a2b8;
 $accent-color: #ffc107;
@@ -162,10 +159,10 @@ $box-shadow-hover: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     color: $text-color;
     line-height: 1.4;
     margin-bottom: $spacer-md;
-    // Limit description lines (optional)
+
     display: -webkit-box;
-    -webkit-line-clamp: 4; // Show 3 lines max
-    line-clamp: 4; // Standard property for compatibility
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -175,11 +172,10 @@ $box-shadow-hover: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 .card-footer {
     padding: $spacer-sm $spacer-md;
     border-top: $border-width solid $border-color;
-    text-align: center; // Align button to the right
+    text-align: center;
     background-color: darken($card-background-color, 1%);
 }
 
-// Reusing button styles (adjust as needed)
 .btn {
     display: inline-block;
     font-weight: $font-weight-bold;
@@ -202,9 +198,9 @@ $box-shadow-hover: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 
 .btn-add-cart {
     color: #fff;
-    background-color: $success-color; // Green button
+    background-color: $success-color;
     border-color: $success-color;
-    font-size: $font-size-sm; // Slightly smaller button text
+    font-size: $font-size-sm;
 
     &:hover {
         background-color: darken($success-color, 10%);

@@ -1,19 +1,14 @@
-// src/app/shared/services/game.service.ts
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of } from 'rxjs'
-import { Game } from '../models/game.model' // Asegúrate que la ruta es correcta
+import { Game } from '../models/game.model'
 
 @Injectable({
     providedIn: 'root'
 })
 export class GameService {
-    // Usamos BehaviorSubject para emitir la lista actual y futuras actualizaciones
-    // Inicializamos con la lista de juegos que tenías en HomeComponent
     private gamesSubject = new BehaviorSubject<Game[]>([
-        // --- Tus datos iniciales de juegos van aquí ---
-        // Es buena idea añadirles un ID único ahora
         {
-            id: 'game-1', // Añadido ID
+            id: 'game-1',
             title: 'The Soccer 2024',
             description: 'Es un videojuego de fútbol...',
             releaseDate: '29/octubre/2024',
@@ -23,14 +18,14 @@ export class GameService {
             comingSoon: false
         },
         {
-            id: 'game-2', // Añadido ID
+            id: 'game-2',
             title: 'Aventura Espacial X',
             description: 'Explora galaxias desconocidas...',
             releaseDate: '15/mayo/2024',
             image: 'https://placehold.co/600x400/17a2b8/FFF?text=Game+Image+2',
             rating: 4.9,
             downloads: 8500,
-            comingSoon: true // Este era true en tus datos
+            comingSoon: true
         },
         {
             id: 'game-3',
@@ -70,7 +65,7 @@ export class GameService {
             image: 'https://placehold.co/600x400/6c757d/FFF?text=Game+Image+6',
             rating: 3,
             downloads: 9800,
-            comingSoon: true // Este era true en tus datos
+            comingSoon: true
         },
         {
             id: 'game-7',
@@ -92,52 +87,32 @@ export class GameService {
             downloads: 50,
             comingSoon: false
         }
-        // --- Fin de los datos iniciales ---
     ])
 
-    // Expón el BehaviorSubject como un Observable público
     games$: Observable<Game[]> = this.gamesSubject.asObservable()
 
-    // Para generar IDs simples (en una app real usarías UUIDs o IDs de backend)
-    private nextId = 9 // Empezar después del último ID manual
+    private nextId = 9
 
     constructor() {}
 
-    /**
-     * Obtiene la lista actual de juegos (solo para operaciones internas si es necesario)
-     * Es mejor suscribirse a games$ desde los componentes.
-     */
     private getCurrentGames(): Game[] {
         return this.gamesSubject.getValue()
     }
 
-    /**
-     * Agrega un nuevo juego a la lista.
-     * @param gameData Los datos del juego a agregar (sin ID).
-     */
     addGame(gameData: Omit<Game, 'id'>): void {
         const currentGames = this.getCurrentGames()
         const newGame: Game = {
             ...gameData,
-            id: `game-${this.nextId++}` // Asigna un nuevo ID único
+            id: `game-${this.nextId++}`
         }
-        // Actualiza la lista y notifica a los suscriptores
+
         this.gamesSubject.next([...currentGames, newGame])
         console.log('Juego agregado:', newGame)
         console.log('Lista actual:', this.getCurrentGames())
     }
 
-    // --- Métodos adicionales (opcionales por ahora) ---
-
-    /**
-     * Obtiene un juego por su ID.
-     * @param id El ID del juego a buscar.
-     * @returns Un Observable que emite el juego encontrado o undefined.
-     */
     getGameById(id: string | number): Observable<Game | undefined> {
         const game = this.getCurrentGames().find((g) => g.id === id)
-        return of(game) // Retorna como Observable
+        return of(game)
     }
-
-    // Podrías añadir métodos updateGame y deleteGame si los necesitas
 }
