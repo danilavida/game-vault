@@ -158,6 +158,12 @@
                 </div>
             </div>
 
+            <div
+                *ngIf="registrationError"
+                class="alert alert-danger mb-md w-100 text-center"
+            >
+                {{ registrationError }}
+            </div>
             <button
                 type="submit"
                 class="btn btn-primary w-100"
@@ -169,8 +175,8 @@
             <div class="text-center mt-lg">
                 <small class="text-muted"
                     >¿Ya tienes cuenta?
-                    <a routerLink="/login">Inicia sesión aquí</a></small
-                >
+                    <a routerLink="/login">Inicia sesión aquí</a>
+                </small>
             </div>
         </form>
     </div>

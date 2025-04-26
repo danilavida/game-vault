@@ -1,6 +1,7 @@
 <div class="login-container d-flex align-items-center justify-content-center">
     <div class="login-card card p-xl">
         <h3 class="text-center mb-lg">Iniciar Sesión</h3>
+
         <div class="login-avatar-placeholder mb-lg">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -15,7 +16,7 @@
                 />
             </svg>
         </div>
-        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" novalidate>
             <div class="form-group mb-md">
                 <label for="email" class="form-label d-block mb-sm"
                     >Correo Electrónico</label
@@ -28,7 +29,7 @@
                     placeholder="tu@correo.com"
                     required
                     email
-                    ngModel
+                    [(ngModel)]="loginData.email"
                     #emailInput="ngModel"
                     [class.is-invalid]="
                         emailInput.invalid && (emailInput.dirty || emailInput.touched)
@@ -57,7 +58,7 @@
                     placeholder="Tu contraseña"
                     required
                     minlength="6"
-                    ngModel
+                    [(ngModel)]="loginData.password"
                     #passwordInput="ngModel"
                     [class.is-invalid]="
                         passwordInput.invalid &&
@@ -80,6 +81,9 @@
                 </div>
             </div>
 
+            <div *ngIf="loginError" class="alert alert-danger mb-md w-100 text-center">
+                {{ loginError }}
+            </div>
             <button
                 type="submit"
                 class="btn btn-primary w-100"
@@ -90,8 +94,8 @@
 
             <div class="text-center mt-lg">
                 <small class="text-muted"
-                    >¿No tienes cuenta? <a href="../register">Regístrate aquí</a></small
-                >
+                    >¿No tienes cuenta? <a routerLink="/register">Regístrate aquí</a>
+                </small>
             </div>
             <div class="text-center mt-sm">
                 <small><a href="#">¿Olvidaste tu contraseña?</a></small>
